@@ -1,0 +1,38 @@
+baseurl = "https://golangfortwo.github.io/"
+languageCode = "en-us"
+title = "My New Hugo Site"
+
+theme = "lanyon-hugo"
+
+contentdir = "content"
+layoutdir = "layouts"
+publishdir = "public"
+builddrafts = false
+canonifyurls = true
+pygmentsuseclasses = true
+
+[permalinks]
+post = ":year/:month/:day/:title/"
+fixed = ":title/"
+
+[markup.goldmark.extensions]
+typographer = true
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[[menu.main]]
+identifier = "categories"
+name = "Categories Section from Menu"
+title = "Categories section"
+url = "/categories/"
+weight = -110
+
+[params]
+Title = "Golang for two"
+Tagline = "Blog about Go programming language"
+Description = "A blog about tips and tricks in the Go programming language over a cup of coffee ☕"
+Author = "Andrii Soldatenko"
+DateForm = "Jan 4 2020"
+mainSections = [ "post" ]
+disableFonts = false
