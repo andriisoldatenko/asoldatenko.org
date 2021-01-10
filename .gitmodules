@@ -1,3 +1,6 @@
 [submodule "themes/lanyon-hugo"]
 	path = themes/lanyon-hugo
 	url = https://github.com/tummychow/lanyon-hugo
+[submodule "lanyon-hugo"]
+	path = lanyon-hugo
+	url = https://github.com/tummychow/lanyon-hugo
