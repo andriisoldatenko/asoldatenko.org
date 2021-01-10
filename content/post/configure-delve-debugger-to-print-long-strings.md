@@ -1,14 +1,11 @@
 ---
 title: "Configure delve debugger to print long strings"
-date: 2012-11-01
+date: 2019-02-13
 description: "Configure delve debugger to print long strings"
-tags:
-- golang
-- delve
-- debugger
 categories:
+- golang
+- debugger
 - delve
-draft: true
 ---
 
 Сегодня наткнулся на то, что print в режиме дебаггера, не показывает длинные строки.

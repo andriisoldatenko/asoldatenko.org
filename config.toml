@@ -33,6 +33,6 @@ Title = "Golang for two"
 Tagline = "Blog about Go programming language"
 Description = "A blog about tips and tricks in the Go programming language over a cup of coffee ☕"
 Author = "Andrii Soldatenko"
-DateForm = "Jan 4 2020"
 mainSections = [ "post" ]
 disableFonts = false
+
