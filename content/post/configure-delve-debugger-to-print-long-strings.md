@@ -8,7 +8,7 @@ categories:
 - delve
 ---
 
-Сегодня наткнулся на то, что print в режиме дебаггера, не показывает длинные строки.
+Today I came across the fact that print in debugger mode does not show long lines.
 ```bash
 > main.main() ./main.go:7 (PC: 0x10b08d4)
      2:
