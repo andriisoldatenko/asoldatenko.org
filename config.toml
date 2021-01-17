@@ -12,6 +12,7 @@ canonifyurls = true
 pygmentsuseclasses = true
 
 googleAnalytics = "UA-76003429-1"
+disqusShortname = "https-golangfortwo-com"
 
 [permalinks]
 post = ":year/:month/:day/:title/"
