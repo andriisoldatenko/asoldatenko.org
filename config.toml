@@ -1,6 +1,6 @@
-baseurl = "https://golangfortwo.com/"
+baseurl = "https://asoldatenko.org/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Personal Blog"
 
 theme = "lanyon-hugo"
 
@@ -32,9 +32,9 @@ url = "/categories/"
 weight = -110
 
 [params]
-Title = "Golang for two"
-Tagline = "Blog about Go programming language"
-Description = "A blog about tips and tricks in the Go programming language over a cup of coffee ☕"
+Title = "Andrii's blog"
+Tagline = "Andrii's blog about programming"
+Description = "A blog about tips and tricks in the differen programming languages over a cup of coffee ☕"
 Author = "Andrii Soldatenko"
 mainSections = [ "post" ]
 disableFonts = false
