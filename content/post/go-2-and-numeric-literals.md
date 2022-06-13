@@ -1,6 +1,7 @@
 ---
 title: "Go 2 and Numeric Literals"
 date: 2019-08-22T19:13:15+02:00
+tags: ["golang", "numeric literals", "go2"]
 categories:
 - golang
 - numeric literals
