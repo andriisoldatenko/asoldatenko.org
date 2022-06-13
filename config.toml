@@ -33,7 +33,7 @@ weight = -110
 
 [params]
 Title = "Andrii's blog"
-Tagline = "Andrii's blog about programming"
+Tagline = "Blog about programming"
 Description = "A blog about tips and tricks in the differen programming languages over a cup of coffee ☕"
 Author = "Andrii Soldatenko"
 mainSections = [ "post" ]
