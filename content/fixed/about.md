@@ -4,7 +4,12 @@ sidebar: true
 weight: 1
 ---
 
-Hi there! I'm gopher from Ukraine, i'm working remotly as a Senior Software Engineer via top 3% of Freelance Talent #toptal network. Also i'm speaker at many Gophercons and meetu. In free time I'm crossFit and gymanstic amateur.
+My name is Andrii Soldatenko. I am a software engineer originally from Ukraine 🇺🇦, currently living in 🇦🇹 .
+
+Currently, learning #Rust, so feel free to suggest good links for newbies.
+
+I am a crossfit AMATEUR. Big fun of hand walking and different gymnastics :)
+
 
 ### Follow me:
 * <a rel="me" href="https://hachyderm.io/@andrii">Mastodon</a>
@@ -13,5 +18,4 @@ Hi there! I'm gopher from Ukraine, i'm working remotly as a Senior Software Engi
 * [github](https://github.com/andriisoldatenko/)
 
 ### My current backend work:
-* [https://golangfortwo.com/](https://golangfortwo.com/) - my personal blog
-
+* [https://asoldatenko.org/](https://asoldatenko.org) - my personal blog
