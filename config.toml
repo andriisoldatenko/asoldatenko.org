@@ -40,3 +40,7 @@ mainSections = [ "post" ]
 disableFonts = false
 dateForm = "02 Jan 2006"
 
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+section = ["HTML","RSS", "JSON"]
+
