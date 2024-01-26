@@ -38,4 +38,5 @@ Description = "A blog about tips and tricks in the differen programming language
 Author = "Andrii Soldatenko"
 mainSections = [ "post" ]
 disableFonts = false
+dateForm = "02 Jan 2006"
 
