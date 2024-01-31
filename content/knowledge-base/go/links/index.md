@@ -1,5 +1,5 @@
 ---
-title: "go"
+title: "links"
 weight: 1
 date: 2024-01-25
 categories:
@@ -8,6 +8,7 @@ categories:
 ---
 
 ### Random favorite links:
+- [opentelemetry-go/CONTRIBUTING.md](https://github.com/open-telemetry/opentelemetry-go/blob/main/CONTRIBUTING.md) 📝 **_NOTE:_** Interesting contributing guide
 - [Hiring Challenge: Smallest Golang Websocket Client](https://dyte.io/blog/hiring-challenge-smallest-golang-websocket-client/)
 TIL from an article is [UPX](https://upx.github.io/) is a free, secure, portable, extendable, high-performance executable packer for several executable formats.
 - [golangci-lint](https://github.com/golangci/golangci-lint)

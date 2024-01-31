@@ -21,4 +21,4 @@ This page contains all my links and finding related to public speaking, conferen
 ### How to find new conferences and CFP:
 
 * It's useful to watch this repo [developers-conferences-agenda](https://github.com/scraly/developers-conferences-agenda) to track new conferences.
-* 
+* Web page for all conferences from prev link https://developers.events/
