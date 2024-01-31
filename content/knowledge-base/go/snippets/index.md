@@ -12,7 +12,8 @@ categories:
 ## This is collection of my random golang snippets:
 
 
-### Prefixes for binary multiples.
+### [Prefixes for binary multiples](#prefixes-for-binary-multiples)
+
 If you're looking for `1024` constants to prefix you binary multiples may be somewhere in `math` package, unfortunately 
 it doesn't exist there. But luckily I found Rob Pike's suggestion inside [go-nuts](https://groups.google.com/g/golang-nuts/c/AHoxOtHCOyw?pli=1)
 ```go
