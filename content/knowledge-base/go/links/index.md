@@ -8,6 +8,8 @@ categories:
 ---
 
 ### Random favorite links:
+- [50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs](https://golang50shad.es/index.html)
+- [Golden config for golangci-lint](https://gist.github.com/maratori/47a4d00457a92aa426dbd48a18776322)
 - [opentelemetry-go/CONTRIBUTING.md](https://github.com/open-telemetry/opentelemetry-go/blob/main/CONTRIBUTING.md) 📝 **_NOTE:_** Interesting contributing guide
 - [Hiring Challenge: Smallest Golang Websocket Client](https://dyte.io/blog/hiring-challenge-smallest-golang-websocket-client/)
 TIL from an article is [UPX](https://upx.github.io/) is a free, secure, portable, extendable, high-performance executable packer for several executable formats.
