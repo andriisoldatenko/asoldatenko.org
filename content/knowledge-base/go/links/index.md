@@ -53,3 +53,7 @@ Heap or stack?
 ## Go reading lists:
 - https://github.com/biberlabs/go-resources
 - [!] https://github.com/enocom/gopher-reading-list
+
+
+[^1]:  https://github.com/enocom/gopher-reading-list
+[^2]: https://golang50shad.es/index.html
