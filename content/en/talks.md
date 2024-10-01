@@ -2,6 +2,7 @@
 title: "My talks and presentation"
 sidebar: true
 weight: 1
+toc: false
 ---
 
 ### Intro
