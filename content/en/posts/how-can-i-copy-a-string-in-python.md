@@ -11,10 +11,9 @@ categories:
 ---
 
 > “Mathematics reveals its secrets only to those who approach it with pure love, for its own beauty.”
-
 > ― Archimedes
 
-![Domenico Fetti Archimedes](/450px-Domenico-Fetti_Archimedes_1620.jpg)
+![Domenico Fetti Archimedes](/assets/450px-Domenico-Fetti_Archimedes_1620.jpg)
 
 ## Quick introduction
 Why do you need to copy a Python strings? It's interesting question, 
@@ -24,7 +23,8 @@ as that makes dictionary lookups faster.
 
 
 ### May be use slice?
-```
+
+```bash
 $ python3
 Python 3.5.2 (default, Sep 15 2016, 07:38:42)
 [GCC 4.2.1 Compatible Apple LLVM 7.3.0 (clang-703.0.31)] on darwin
@@ -37,7 +37,8 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 ### Add empty string? No!
-```
+
+```bash
 >>> a = 'python'
 >>> id(a)
 4400931648
@@ -47,7 +48,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 ### Or use str function?
-```
+```bash
 >>> a = 'python'
 >>> id(a)
 4400931648
@@ -57,7 +58,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 ### Try to use copy?
-```
+```bash
 >>> a = 'python'
 >>> id(a)
 4400931648
@@ -68,7 +69,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 ### Let's do deepcopy!
-```
+```bash
 >>> a = 'python'
 >>> id(a)
 4400931648
@@ -81,7 +82,7 @@ No chance!
 
 ### Another tries with using slice?
 
-```
+```bash
 >>> a = 'python'
 >>> b = (a + '.')[:-1]
 >>> id(a)
@@ -93,7 +94,7 @@ Eureka!
 ```
 
 ### Last try with encode and decode
-```
+```bash
 >>> a = 'python'
 >>> id(a)
 4400931648
@@ -116,7 +117,7 @@ Answer is: **no you can't**.
 
 Every time we create new string, both working examples 
 uses the same idea:
-```
+```bash
 >>> a = 'a' * 1024
 >>> b = 'a' * 1024
 >>> id(a)

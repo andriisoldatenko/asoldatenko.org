@@ -36,7 +36,7 @@ RUN cd /src && go build -o goapp
 And then we run something like this:
 
 ```bash
-➜ debug-multi-stage-docker-and-go docker run -it --entrypoint=dlv goapp
+docker run -it --entrypoint=dlv goapp
 docker: Error response from daemon: OCI runtime create failed: container_linux.go:344: starting container process caused "exec: \"dlv\": executable file not found in $PATH": unknown.
 ```
 
@@ -56,7 +56,7 @@ And Voila! A huge plus ⚡️ of this approach for me personally, the lack of Do
 
 P.S. If you have docker-compose, then in your docker-compose.override.yml you can write like this:
 
-```
+```yaml
 version: "3.4"
 services:
 app:

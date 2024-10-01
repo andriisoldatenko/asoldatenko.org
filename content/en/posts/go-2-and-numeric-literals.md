@@ -27,9 +27,9 @@ func main() {
     println("1_200_000 -> ", 1_200_000)
     println("3.1415_9265 -> ", 3.1415_9265)
     println("0b0110_1101_1101_0010 -> ",0b0110_1101_1101_0010)
-// println("0___ -> ", 0___) invalid example from discussion
-// println(" 0__.0__e-0__ -> ",0__.0__e-0__) invalid example from discussion
-// println("1__2", 1__2) invalid
+    // println("0___ -> ", 0___) invalid example from discussion
+    // println(" 0__.0__e-0__ -> ",0__.0__e-0__) invalid example from discussion
+    // println("1__2", 1__2) invalid
 }
 ```
 

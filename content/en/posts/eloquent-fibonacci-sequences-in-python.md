@@ -15,7 +15,7 @@ categories:
 
 > ― Leonardo Bonacci - italian mathematician
 
-![Leonardo Bonacci](/Fibonacci2.jpg)
+![Leonardo Bonacci](/assets/Fibonacci2.jpg)
 
 ## Quick introduction
 The idea of this article to collect eloquent python patterns using well-known
