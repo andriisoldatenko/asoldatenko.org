@@ -99,10 +99,10 @@ ignoreLogs = ['additional-script-loading-error']
   avatar = "avatar.jpg" # put the file in assets folder; also ensure that image has same height and width
   # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
   intro = "Andrii's blog about programming"
-  name = "name Andrii Soldatenko"
-  description = "hacking and other random stuff."
+  name = "Andrii Soldatenko"
+  description = "hacking and tips and tricks i learnt over a cup of coffee ☕"
 
-# Allow to override webmanifest options
+# Allow overriding webmanifest options
 [Languages.en-gb.params.webmanifest]
   name = "sitename" # will use "params.sitename" or "title" by default
   short_name = "sitename" # same as name
