@@ -68,6 +68,11 @@ ignoreLogs = ['additional-script-loading-error']
     name = 'About'
     url = '/about/'
     weight = 40
+  [[Languages.en-gb.menu.main]]
+    pageRef="notes"
+    name = 'Notes'
+    url = '/notes/'
+    weight = 50
 
 [Languages.en-gb.params]
   sitename = "Awesome hugo blog"
@@ -127,3 +132,7 @@ url = "https://twitter.com/a_soldatenko"
 [[params.socialIcons]]
 name = "Rss"
 url = "/index.xml"
+
+[outputs]
+home = ['html', 'rss', 'json']
+page = ['html']
