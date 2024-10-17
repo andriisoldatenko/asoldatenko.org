@@ -16,18 +16,18 @@ Delve is the debugger that I usually use every day. If you open the documentatio
 
 You can install it:
 
-```
+```bash
 go get -u github.com/go-delve/delve/cmd/dlv
 ```
 
 Most often I use dlv debug <package name>:
 
-```
+```bash
 dlv debug github.com/andriisoldatenko/go-blog
 ```
 or
 
-```
+```bash
 dlv debug main.go
 (dlv) breakpoint main.go:1
 (dlv) continue

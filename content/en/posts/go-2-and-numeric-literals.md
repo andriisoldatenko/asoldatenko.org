@@ -11,7 +11,7 @@ categories:
 Tl;dr Go version 2 is going to add some changes that will affect numeric literals. Everybody already knew it didn't they?
 Let's see what is already in the go repo in the master branch:
 
-```
+```bash
 $ git clone git@github.com:golang/go.git
 $ cd go/src && ./all.bash
 $ go version devel +eee07a8e68 Wed Aug 21 15:20:00 2019 +0000 darwin/amd64
@@ -20,22 +20,22 @@ One of the most noticeable for me is of course _ in numbers).
 
 here is example:
 
-```
+```go
 package main
 
 func main() {
-println("1_200_000 -> ", 1_200_000)
-println("3.1415_9265 -> ", 3.1415_9265)
-println("0b0110_1101_1101_0010 -> ",0b0110_1101_1101_0010)
-// println("0___ -> ", 0___) invalid example from discussion
-// println(" 0__.0__e-0__ -> ",0__.0__e-0__) invalid example from discussion
-// println("1__2", 1__2) invalid
+    println("1_200_000 -> ", 1_200_000)
+    println("3.1415_9265 -> ", 3.1415_9265)
+    println("0b0110_1101_1101_0010 -> ",0b0110_1101_1101_0010)
+    // println("0___ -> ", 0___) invalid example from discussion
+    // println(" 0__.0__e-0__ -> ",0__.0__e-0__) invalid example from discussion
+    // println("1__2", 1__2) invalid
 }
 ```
 
 So:
 
-```
+```bash
 $ go version
 $ go1.12.7 darwin/amd64
 $ go run main.go
@@ -49,7 +49,7 @@ Oops 😬
 
 
 Second attempt:
-```
+```bash
 ./go version
 devel +eee07a8e68 Wed Aug 21 15:20:00 2019 +0000 darwin/amd64
 ./go run main.go

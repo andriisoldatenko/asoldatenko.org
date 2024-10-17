@@ -12,28 +12,35 @@ This document is useful for using Vim (neovim) and other tools.
 
 
 ## 1. Edit the current shell command in Vim
->Note: assuming
-```
+
+If you env variable `$EDITOR` is set to `vim`, 
+you can use `Ctrl-x Ctrl-e` to edit in `vim` just typed command:
+
+Example what you can put into your `.bashrc`:
+```bash
 export EDITOR=nvim
 # Enable Ctrl-x-e to edit the command line
 autoload -U edit-command-line
 ```
 
-```
-Ctrl-x Ctrl-e
+## 2. Rename a few files at a time using VIM
+
+Download `vimv` script:
+
+```bash
+curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > /usr/local/bin/vimv && \ 
+  chmod +755 /usr/local/bin/vimv
 ```
 
-## 2. Rename a few files at a time using VIM
-```
-curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > /usr/local/bin/vimv && chmod +755 /usr/local/bin/vimv
-```
+Type in terminal `vinv` and pattern to rename files:
 
 `vimv *.txt`
 
+it will open vim like a window where you can rename files and apply.
 
-P.S. Of course, you need the `$EDITOR` env variable.
+P.S. you need the `$EDITOR` env variable to be set.
 
-## 3. Jump to interesting elements in an editor:
+## 3. Jump to interesting elements in your default editor:
 
 ```
 $ git jump diff
@@ -56,7 +63,3 @@ index a655540..5a59044 100644
 `$ git jump diff`
 
 Will open an `$EDITOR` on `foo.c:3`.
-
-
-
-To be continued…

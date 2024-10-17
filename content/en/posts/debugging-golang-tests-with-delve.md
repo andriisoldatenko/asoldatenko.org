@@ -14,7 +14,7 @@ How to debug golang unit-tests using delve 🐛🔥?
 
 So, often you need to run 1 test and even in debug mode, for example, when you wrote a test that repeats a bug. It's very simple (although not very obvious from the docks):
 
-```
+```bash
 dlv test -- -test.run NameOfYourTest/PartOfTheName* 
 ```
 
@@ -22,7 +22,7 @@ similar to `go test -run`.
 
 Or a live example:
 
-```
+```bash
 ➜ debug_test dlv test -- -test.run TestFibonacciBig
 (dlv) b main_test.go:6
 Breakpoint 1 set at 0x115887f for github.com/andriisoldatenko/debug_test.TestFibonacciBig() ./main_test.go:6
@@ -44,7 +44,7 @@ Breakpoint 1 set at 0x115887f for github.com/andriisoldatenko/debug_test.TestFib
 
 Alternatively, run with -v (remember go test -v):
 
-```
+```bash
 ➜ debug_test dlv test -- -test.v -test.run TestFibonacciBig
 (dlv) c
 === RUN TestFibonacciBig

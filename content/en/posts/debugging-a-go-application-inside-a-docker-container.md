@@ -14,8 +14,11 @@ categories:
 So we need:
 straight arms and basin with docker preinstalled:
 
-```
-$ cat Dockerfile
+
+`cat Dockerfile`
+
+
+```dockerfile
 FROM golang:1.13
 
 WORKDIR /go/src/app
@@ -26,12 +29,13 @@ RUN go get -u github.com/go-delve/delve/cmd/dlv
 CMD ["app"]
 ```
 
-$ docker build -t my-golang-app .
+and then run: 
+`docker build -t my-golang-app .`
 
 
 This is just one of the options, sometimes you need to start dlv instead of bash and so on.
 
-```
+```bash
 $ docker run -it --rm my-golang-app bash
 
 $ root@03c1977b1063:/go/src/app# dlv main.go
@@ -46,15 +50,16 @@ OOps...
 
 So let's add the parameters:
 
-```
+```bash
 $ docker run -it --rm --security-opt="apparmor=unconfined" --cap-add=SYS_PTRACE my-golang-app bash
 ```
 
 voila 🎉
 
-```
+```bash
 $ root@7dc3a7e8b3fc:/go/src/app# dlv debug main.go
 Type 'help' for list of commands.
 (dlv)
 ```
+
 P.S. same trick can be used with `docker-compose` or multi-stage builds. If you are interested in how to debug multi-stage builds on Go, please put “+” in the comments or throw a tomato 🍅.
