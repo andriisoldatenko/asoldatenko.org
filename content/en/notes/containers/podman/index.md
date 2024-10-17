@@ -13,7 +13,7 @@ tl;dr
 ```bash
 podman machine ssh
 sudo -i
-rpm-ostree install qemu-user-assets
+rpm-ostree install qemu-user-static
 systemctl reboot
 podman run --rm -it docker.io/amd64/alpine:3.14 sh
 ```
