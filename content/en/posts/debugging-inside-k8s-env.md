@@ -68,7 +68,7 @@ mindmap
     Debug Pods
       kubectl describe pods POD_NAME
         My pod stays pending
-            You don't have enough resources
+            You do not have enough resources
             You are using hostPort
         My pod stays waiting
             Have you pushed the image to the registry?
