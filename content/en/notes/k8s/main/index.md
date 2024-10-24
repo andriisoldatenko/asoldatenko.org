@@ -28,6 +28,14 @@ ps | grep pause
  2509 root      0:00 grep pause
 ```
 
+Source code of pause container: [pause.c](https://github.com/kubernetes/kubernetes/blob/master/build/pause/linux/pause.c).
+
+Quoting from [What is the role of 'pause' container?](https://groups.google.com/forum/#!topic/kubernetes-users/jVjv0QK4b_o):
+
+> The pause container is a container which holds the network namespace for the pod. It does nothing 'useful'. (It's actually just a little bit of assembly that goes to sleep and never wakes up)
+
+> This means that your 'apache' container can die, and come back to life, and all of the network setup will still be there. Normally if the last process in a network namespace dies the namespace would be destroyed and creating a new apache container would require creating all new network setup. With pause, you'll always have that one last thing in the namespace.
+
 
 ### Random favorite links:
 
