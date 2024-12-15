@@ -6,7 +6,7 @@ categories:
   - k8s
 ---
 
-[The Almighty Pause Container](https://www.ianlewis.org/en/almighty-pause-container)
+## [The Almighty Pause Container](https://www.ianlewis.org/en/almighty-pause-container)
 
 From the article:
 > In Kubernetes, the pause container serves as the “parent container” for all of the containers in your pod. The pause container has two core responsibilities. First, it serves as the basis of Linux namespace sharing in the pod. And second, with PID (process ID) namespace sharing enabled, it serves as PID 1 for each pod and reaps zombie processes.
@@ -35,6 +35,17 @@ Quoting from [What is the role of 'pause' container?](https://groups.google.com/
 > The pause container is a container which holds the network namespace for the pod. It does nothing 'useful'. (It's actually just a little bit of assembly that goes to sleep and never wakes up)
 
 > This means that your 'apache' container can die, and come back to life, and all of the network setup will still be there. Normally if the last process in a network namespace dies the namespace would be destroyed and creating a new apache container would require creating all new network setup. With pause, you'll always have that one last thing in the namespace.
+
+
+## [Kubernetes 1.27: Quality-of-Service for Memory Resources (alpha)](https://kubernetes.io/blog/2023/05/05/qos-memory-resources/)
+
+`spec.containers[].resources.requests`
+
+> When you specify the resource request for containers in a Pod, the Kubernetes scheduler uses this information to decide which node to place the Pod on. The scheduler ensures that for each resource type, the sum of the resource requests of the scheduled containers is less than the total allocatable resources on the node.
+
+`spec.containers[].resources.limits`
+
+> When you specify the resource limit for containers in a Pod, the kubelet enforces those limits so that the running containers are not allowed to use more of those resources than the limits you set.
 
 
 ### Random favorite links:
