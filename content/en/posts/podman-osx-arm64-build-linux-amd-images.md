@@ -99,32 +99,50 @@ version:
 ```
 
 
-### If you see a problem during podman build with pulling images:
-
-> Note: 
-> 
-> Error: short-name "go:latest" did not resolve to an alias and no unqualified-search registries are defined in "/etc/containers/registries.conf"
-
-You need to ssh to machine and add config:
+### Next if you see a problem during podman build while pulling images:
 
 ```
-podman machine ssh podman-machine-custom
+Error: short-name "go:latest" did not resolve to an alias and no unqualified-search registries are defined in "/etc/containers/registries.conf"
+```
+
+or
+
+```
+Error: short-name resolution enforced but cannot prompt without a TTY
+```
+
+
+You need to ssh to machine and update `containers/registries.conf` config:
+
+```
+podman machine ssh
 $ 
 ```
 
-with content like:
+create dir if it doesn't exists and add config:
 
 ```bash
-core@localhost:~$ cat ~/.config/containers/registries.conf
+core@localhost:~$ mkdir -p $HOME/.config/containers/
+
+
+root@localhost:~# vim $HOME/.config/containers/registries.conf
+```
+
+with content:
+
+
+```
+cat $HOME/.config/containers/registries.conf
 short-name-mode="permissive"
 unqualified-search-registries = ['docker.io']
 ```
 
+For more details about configuring registries you can find in official documentations https://github.com/containers/image/blob/main/docs/containers-registries.conf.5.md.
 
 
 ### Conclusion
 
 Now you can build images using `podman build --platform='linux/amd64'` using you local
-Mac with arm64 architecture ;) 
+Mac with arm64 architecture and deploy to kubernetes with amd64 ;) 
 
 done :tada:
