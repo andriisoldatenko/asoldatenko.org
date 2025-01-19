@@ -1,7 +1,8 @@
 ---
-title: "Podman Osx Arm64 Build Linux Amd Images"
+title: "Build amd64 images using podman 3.5.x on OSX with arm64"
 date:  2025-01-14T11:53:58+01:00
 description: "Podman Osx Arm64 Build Linux Amd Images"
+toc: false
 categories:
 - podman
 - podman-desktop
@@ -145,4 +146,7 @@ For more details about configuring registries you can find in official documenta
 Now you can build images using `podman build --platform='linux/amd64'` using you local
 Mac with arm64 architecture and deploy to kubernetes with amd64 ;) 
 
-done :tada:
+done 
+
+:ice_cream:
+:tada:

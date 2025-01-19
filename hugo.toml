@@ -25,8 +25,8 @@ ignoreLogs = ['additional-script-loading-error']
 
   # To enable Disqus comments, provide Disqus Shortname below.
   # To disable Disqus comments, simply leave the field empty or remove the next two lines
-  [services.disqus]
-    shortname = 'asoldatenko-org'
+  #  [services.disqus]
+  #    shortname = 'asoldatenko-org'
 
   # set markup.highlight.noClasses=false to enable code highlight
   [markup]
@@ -75,7 +75,7 @@ ignoreLogs = ['additional-script-loading-error']
     weight = 50
 
 [Languages.en-gb.params]
-  sitename = "Awesome hugo blog"
+  sitename = "andrii soldatenko blog about programming"
   defaultColor = "light" # set color mode: dark, light, auto
   # Setting it to 'auto' applies the color scheme based on the visitor's device color preference.If you don't specify anything, ignore this parameter, or leave it blank,
   # the default value is set to 'auto'.
