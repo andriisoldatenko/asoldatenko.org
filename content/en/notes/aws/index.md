@@ -1,6 +1,4 @@
 
-
-
 ```yaml
 network:
   version: 2

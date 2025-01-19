@@ -43,7 +43,7 @@ docker: Error response from daemon: OCI runtime create failed: container_linux.g
 And here's the bad luck, the same story will be if you have docker-compose for local development or something else. How to be)
 Docker build has a wonderful --target flag!
 
-```
+```bash
 docker build --target builder -t goapp:latest .
 docker run -it goapp sh
 # dlv debug main.go

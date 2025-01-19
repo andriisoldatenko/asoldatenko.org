@@ -27,6 +27,7 @@ import sys
 for line in sys.stdin:
     a,b = map(int, line.split())
 ```
+
 Проблема этого кода в том, что мы очень много раз вызываем функцию `int`.
 
 Далее я нашел похожий вопрос/ответ на SO: https://stackoverflow.com/questions/12784192/is-there-a-faster-way-to-get-input-in-python.
@@ -43,6 +44,7 @@ for line in sys.stdin:
 ```
 
 Короткий бенчмарк:
+
 ```python
 import timeit
 
@@ -52,4 +54,5 @@ timeit.timeit('ord("1")-48')
 timeit.timeit('int("1")')
 # 0.17183380699134432
 ```
+
 =)

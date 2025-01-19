@@ -8,9 +8,9 @@ categories:
 - delve
 ---
 
-# How to debug golang code
+## How to debug golang code
 
-Yes, the Go code can and should be debugged. I often clash in different teams, as developers, so far in 2019! debug with prints :)
+Yes, the Go code can and should be debugged. I often clash in different teams, as developers, so far in 2019! Debug with prints :)
 
 Delve is the debugger that I usually use every day. If you open the documentation, it's not perfect to say the least.
 
@@ -25,6 +25,7 @@ Most often I use dlv debug <package name>:
 ```bash
 dlv debug github.com/andriisoldatenko/go-blog
 ```
+
 or
 
 ```bash

@@ -8,4 +8,5 @@ categories:
 ---
 
 ## Links
+
 - https://github.com/zhanymkanov/fastapi-best-practices

@@ -8,4 +8,5 @@ categories:
 ---
 
 *Favorite Articles:*
+
 - [Using JSONPath effectively in AWS Step Functions](https://aws.amazon.com/blogs/compute/using-jsonpath-effectively-in-aws-step-functions/)

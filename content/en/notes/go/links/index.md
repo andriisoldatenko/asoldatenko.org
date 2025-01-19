@@ -7,18 +7,22 @@ categories:
   - golang
 ---
 
-### Random favorite links:
+### Random favorite links
+
 - [Build Constraints](https://pkg.go.dev/go/build#hdr-Build_Constraints)
 tl;dr
+
 > A build constraint, also known as a build tag, is a condition under which a file should be included in the package. Build constraints are given by a line comment that begins
+
 ```azure
 //go:build
 ```
+
 - [50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs](https://golang50shad.es/index.html)
 - [Golden config for golangci-lint](https://gist.github.com/maratori/47a4d00457a92aa426dbd48a18776322)
 - [opentelemetry-go/CONTRIBUTING.md](https://github.com/open-telemetry/opentelemetry-go/blob/main/CONTRIBUTING.md) 📝 **_NOTE:_** Interesting contributing guide
 - [Generic retry function in Go](https://rednafi.com/go/generic_retry_function/)
-TIL: you can do better with closures :) 
+TIL: you can do better with closures :)
 - [WebSockets Using Go](https://golangbot.com/go-websocket-server/)
 TIL: [websocat](https://github.com/vi/websocat)
 - [Hiring Challenge: Smallest Golang Websocket Client](https://dyte.io/blog/hiring-challenge-smallest-golang-websocket-client/)
@@ -50,6 +54,7 @@ Golang linter
 - https://kuree.gitbooks.io/the-go-programming-language-report/content/27/text.html
 Heap or stack?
 
-## Go reading lists:
+## Go reading lists
+
 - https://github.com/biberlabs/go-resources
 - [!] https://github.com/enocom/gopher-reading-list

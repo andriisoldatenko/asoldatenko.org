@@ -51,15 +51,13 @@ ytstat -playListID PLHhKcdBlprMdIMzUZX6ho0OPTikTamLwa -apiKey <apiKey> | jq
 ]
 ```
 
-
-### Favorite Talks:
+### Favorite Talks
 
 * TODO
 
-
-### Watched Talks:
+### Watched Talks
 
 1. #### [The future of CRDs in a post-cluster world - Sebastian Scheele & Stefan Schimanski](https://www.youtube.com/watch?v=dg0g15Qv5Fo&list=WL)
+
 Interesting idea how to connect CRD/operators and SaaS providers like MongoDB.
 `TIL`: https://github.com/kube-bind/kube-bind
-

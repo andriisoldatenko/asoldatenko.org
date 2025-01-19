@@ -9,6 +9,7 @@ categories:
 ---
 
 Today I came across the fact that print in debugger mode does not show long lines.
+
 ```bash
 > main.main() ./main.go:7 (PC: 0x10b08d4)
      2:
@@ -21,7 +22,9 @@ Today I came across the fact that print in debugger mode does not show long line
 (dlv) p v1
 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...+2 more"
 ```
+
 Let's change `max-string-len`:
+
 ```bash
 (dlv) config -list
 aliases            map
@@ -33,5 +36,5 @@ show-location-expr false
 (dlv) p v1
 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 ```
-✅ Now we are good to go.
 
+✅ Now we are good to go.
