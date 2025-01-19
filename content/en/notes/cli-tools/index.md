@@ -8,10 +8,9 @@ categories:
   - command line tools
 ---
 
-## This is collection of my favorite cli tools with examples:
+## This is collection of my favorite cli tools with examples
 
-
-### [peco](#peco) 
+### [peco](#peco)
 
 [Simplistic interactive filtering tool](https://github.com/peco/peco)
 

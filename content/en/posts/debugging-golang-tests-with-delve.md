@@ -51,4 +51,3 @@ Alternatively, run with -v (remember go test -v):
 --- PASS: TestFibonacciBig (0.00s)
 PASS
 ```
-

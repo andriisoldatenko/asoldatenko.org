@@ -9,15 +9,14 @@ toc: false
 
 Hi there! My name is Andrii Soldatenko, and you are reading my personal blog.
 
-I've started public speaking in 2014... 
+I've started public speaking in 2014...
 
 Here is the list of all my public speaking talks. I'm going to update this list
 chronologically as I go.
 
-### Programming Talks:
+### Programming Talks
 
-* [Debugging concurrency programs in Go](), FOSDEM, Feb 2023. (Slides:, video) 
-* [Advanced Debugging Techniques of Go Code]()
+* [Debugging concurrency programs in Go], FOSDEM, Feb 2023. (Slides:, video)
+* [Advanced Debugging Techniques of Go Code]
 
 [//]: # (* <name>. conf name, month YEAR.)
-

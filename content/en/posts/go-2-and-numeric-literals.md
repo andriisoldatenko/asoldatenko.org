@@ -12,10 +12,11 @@ Tl;dr Go version 2 is going to add some changes that will affect numeric literal
 Let's see what is already in the go repo in the master branch:
 
 ```bash
-$ git clone git@github.com:golang/go.git
-$ cd go/src && ./all.bash
-$ go version devel +eee07a8e68 Wed Aug 21 15:20:00 2019 +0000 darwin/amd64
+git clone git@github.com:golang/go.git
+cd go/src && ./all.bash
+go version devel +eee07a8e68 Wed Aug 21 15:20:00 2019 +0000 darwin/amd64
 ```
+
 One of the most noticeable for me is of course _ in numbers).
 
 here is example:
@@ -47,8 +48,8 @@ $ go run main.go
 
 Oops 😬
 
-
 Second attempt:
+
 ```bash
 ./go version
 devel +eee07a8e68 Wed Aug 21 15:20:00 2019 +0000 darwin/amd64

@@ -18,11 +18,11 @@ categories:
 
 ## Problem
 
-You like me want to use podman on OSX (15.2 Sequoia) and build images for `--platform=linux/amd64` :) 
+You like me want to use podman on OSX (15.2 Sequoia) and build images for `--platform=linux/amd64` :)
 
 Welcome to my world!
 
-### Make sure you install rosetta:
+### Make sure you install rosetta
 
 [what is Rosetta?](https://en.wikipedia.org/wiki/Rosetta_(software)):
 >Rosetta is a dynamic binary translator developed by Apple Inc. for macOS, an application compatibility layer between different instruction set architectures. It enables a transition to newer hardware, by automatically translating software. The name is a reference to the Rosetta Stone, the artifact which enabled translation of Egyptian hieroglyphs.[2]
@@ -31,13 +31,12 @@ Welcome to my world!
 softwareupdate --install-rosetta
 ```
 
-more details you can find in podman-desktop docs [Native Apple Rosetta translation layer
-](https://podman-desktop.io/docs/podman/rosetta).
+more details you can find in podman-desktop docs [Native Apple Rosetta translation layer](https://podman-desktop.io/docs/podman/rosetta).
 
+#### podman info
 
-#### `podman info`:
-
-```
+```bash
+$ podman info
 Client:       Podman Engine
 Version:      5.3.1
 API Version:  5.3.1
@@ -56,7 +55,7 @@ OS/Arch:      linux/arm64
 
 #### podman init machine
 
-```
+```bash
 podman machine init podman-machine-custom \ 
   --disk-size 60 \
   --rootful --cpus=4 \
@@ -69,13 +68,12 @@ if you are using the default image from the release page (for me, it didn't work
 > Reasonable question: how did I find the correct image?
 
 First, I've tried fedora coreOS image directly instead of default image for `podman machine init`, and later
-if found its similar image to [podman-machine.aarch64.applehv.raw.zst](https://github.com/containers/podman/releases/download/v5.3.1/podman-machine.aarch64.applehv.raw.zst). 
+if found its similar image to [podman-machine.aarch64.applehv.raw.zst](https://github.com/containers/podman/releases/download/v5.3.1/podman-machine.aarch64.applehv.raw.zst).
 Then I just pulled regular one, with the same version as podman 3.5.1.
 
+#### Now we can check which podman machine we just created (don't forget to run `podman machine start`)
 
-#### Now we can check which podman machine we just created (don't forget to run `podman machine start`):
-
-```
+```bash
 $ podman machine info
 host:
     arch: arm64
@@ -99,40 +97,32 @@ version:
     os: darwin
 ```
 
+### Next, if you see a problem during podman build while pulling images
 
-### Next if you see a problem during podman build while pulling images:
-
-```
+```text
 Error: short-name "go:latest" did not resolve to an alias and no unqualified-search registries are defined in "/etc/containers/registries.conf"
-```
 
-or
+// or
 
-```
 Error: short-name resolution enforced but cannot prompt without a TTY
 ```
 
-
 You need to ssh to machine and update `containers/registries.conf` config:
 
-```
+```bash
 podman machine ssh
-$ 
 ```
 
-create dir if it doesn't exists and add config:
+create dir if it doesn't exist and add config:
 
 ```bash
-core@localhost:~$ mkdir -p $HOME/.config/containers/
-
-
+root@localhost:~$ mkdir -p $HOME/.config/containers/
 root@localhost:~# vim $HOME/.config/containers/registries.conf
 ```
 
 with content:
 
-
-```
+```bash
 cat $HOME/.config/containers/registries.conf
 short-name-mode="permissive"
 unqualified-search-registries = ['docker.io']
@@ -140,13 +130,7 @@ unqualified-search-registries = ['docker.io']
 
 For more details about configuring registries you can find in official documentations https://github.com/containers/image/blob/main/docs/containers-registries.conf.5.md.
 
-
 ### Conclusion
 
 Now you can build images using `podman build --platform='linux/amd64'` using you local
-Mac with arm64 architecture and deploy to kubernetes with amd64 ;) 
-
-done 
-
-:ice_cream:
-:tada:
+Mac with arm64 architecture and deploy to kubernetes with amd64 ;)

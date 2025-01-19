@@ -10,13 +10,13 @@ categories:
 
 This document is useful for using Vim (neovim) and other tools.
 
-
 ## 1. Edit the current shell command in Vim
 
-If you env variable `$EDITOR` is set to `vim`, 
+If you env variable `$EDITOR` is set to `vim`,
 you can use `Ctrl-x Ctrl-e` to edit in `vim` just typed command:
 
 Example what you can put into your `.bashrc`:
+
 ```bash
 export EDITOR=nvim
 # Enable Ctrl-x-e to edit the command line
@@ -40,10 +40,10 @@ it will open vim like a window where you can rename files and apply.
 
 P.S. you need the `$EDITOR` env variable to be set.
 
-## 3. Jump to interesting elements in your default editor:
+## 3. Jump to interesting elements in your default editor
 
-```
-$ git jump diff
+```bash
+git jump diff
 ```
 
 So assume you have such a diff:

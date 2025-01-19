@@ -6,10 +6,11 @@ categories:
   - podman
 ---
 
-### Random favorite links:
+### Random favorite links
 
 - [Running amd64 docker images with Podman on Apple Silicon (M1)](https://edofic.com/posts/2021-09-12-podman-m1-amd64/)
 tl;dr
+
 ```bash
 podman machine ssh
 sudo -i

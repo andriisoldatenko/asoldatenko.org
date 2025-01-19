@@ -11,17 +11,18 @@ categories:
 ---
 
 
-> "If by chance I have omitted anything more or less proper or necessary, I beg forgiveness, since there is no one who is without fault and circumspect in all matters." 
-
+> "If by chance I have omitted anything more or less proper or necessary, I beg forgiveness, since there is no one who is without fault and circumspect in all matters."
 > ― Leonardo Bonacci - italian mathematician
 
 ![Leonardo Bonacci](/assets/Fibonacci2.jpg)
 
 ## Quick introduction
+
 The idea of this article to collect eloquent python patterns using well-known
 Fibonacci sequence.
 
 ## Recursive approach
+
 ```bash
 cat fibonacci1.py
 ```
@@ -43,12 +44,13 @@ $ python3 fibonacci1_bench.py # On my MacBook Pro (Mid 2015) 2.5 GHz Intel Core 
 ```
 
 ## Recursive approach using caching
+
 My favorite advice: you should know you language standard library.
 You can find lot's of info under [functools](https://docs.python.org/3/library/functools.html#functools.lru_cache) module docs.
 Default `maxsize` is `128` for `lru_cache` decorator.
 
 ```bash
-$ cat fibonacci2.py
+cat fibonacci2.py
 ```
 
 ```python
@@ -73,10 +75,11 @@ $ python3 fibonacci2_bench.py # On my MacBook Pro (Mid 2015) 2.5 GHz Intel Core 
 ```
 
 ```bash
-$ cat fibonacci_generator.py
+cat fibonacci_generator.py
 ```
 
 ## Generator approach for using yield
+
 ```python
 def fibonacci_generator():
     a, b = 0, 1
@@ -95,7 +98,8 @@ $ python3 fibonacci_generator.py # On my MacBook Pro (Mid 2015) 2.5 GHz Intel Co
 1.1730475709991879
 ```
 
-## About timeit instead of conclusion.
+## About timeit instead of conclusion
+
 Also keep in mind:
 > Note By default, timeit() temporarily turns off garbage collection during the timing. The advantage of this approach is that it makes independent timings more comparable. This disadvantage is that GC may be an important component of the performance of the function being measured. If so, GC can be re-enabled as the first statement in the setup string.
 

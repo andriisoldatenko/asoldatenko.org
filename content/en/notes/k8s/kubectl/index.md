@@ -10,10 +10,10 @@ categories:
 ---
 
 ## Intro
+
 This page is dedicated to different `kubectl` tips I'm using on my daily job. So feel free to add contact me or suggest another one.
 
-
-### Current running pods per node.
+### Current running pods per node
 
 Similar to `k9s`, if you type `:nodes` but in kubectl:
 
@@ -23,7 +23,6 @@ gke-andrii-test-default-pool-c1873b05-cxm7  Ready  <none>  0       v1.30.6-gke.1
 gke-andrii-test-default-pool-c1873b05-e5lt  Ready  <none>  0       v1.30.6-gke.1125000      12  124  1157     3     8   3920  13261 5h42m
 gke-andrii-test-default-pool-c1873b05-onva  Ready  <none>  0       v1.30.6-gke.1125000       9  115  1166     2     8   3920  13261 5h37m 
 ```
-
 
 ```bash
 kubectl get pods \

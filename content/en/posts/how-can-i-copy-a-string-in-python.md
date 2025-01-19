@@ -16,11 +16,11 @@ categories:
 ![Domenico Fetti Archimedes](/assets/450px-Domenico-Fetti_Archimedes_1620.jpg)
 
 ## Quick introduction
-Why do you need to copy a Python strings? It's interesting question, 
-because Python string is immutable. Also any tries of copy will returns
-the original string. Python tries to keep just the one copy, 
-as that makes dictionary lookups faster.
 
+Why do you need to copy a Python strings? It's interesting question,
+because Python string is immutable. Also any tries of copy will returns
+the original string. Python tries to keep just the one copy,
+as that makes dictionary lookups faster.
 
 ### May be use slice?
 
@@ -36,7 +36,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 (4400931648, 4400931648)
 ```
 
-### Add empty string? No!
+### Add empty string? No
 
 ```bash
 >>> a = 'python'
@@ -48,6 +48,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 ### Or use str function?
+
 ```bash
 >>> a = 'python'
 >>> id(a)
@@ -58,6 +59,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 ### Try to use copy?
+
 ```bash
 >>> a = 'python'
 >>> id(a)
@@ -68,7 +70,8 @@ Type "help", "copyright", "credits" or "license" for more information.
 4400931648
 ```
 
-### Let's do deepcopy!
+### Let's do deepcopy
+
 ```bash
 >>> a = 'python'
 >>> id(a)
@@ -94,6 +97,7 @@ Eureka!
 ```
 
 ### Last try with encode and decode
+
 ```bash
 >>> a = 'python'
 >>> id(a)
@@ -107,16 +111,17 @@ Eureka!
 Eureka!
 ```
 
-
 ## Conclusion
-Try to answer the first question: 
+
+Try to answer the first question:
 
 > Can I copy or clone string in Python?
 
-Answer is: **no you can't**. 
+Answer is: **no you can't**.
 
-Every time we create new string, both working examples 
+Every time we create new string, both working examples
 uses the same idea:
+
 ```bash
 >>> a = 'a' * 1024
 >>> b = 'a' * 1024
@@ -125,10 +130,12 @@ uses the same idea:
 >>> id(b)
 140726843315712
 ```
-P.S. Thanks for ideas from Pavel's talk from PyCon Russian 2016 and some 
+
+P.S. Thanks for ideas from Pavel's talk from PyCon Russian 2016 and some
 more info you can find in references.
 
 ## References
+
 - [How can you copy (clone) a string?](https://mail.python.org/pipermail/python-list/2000-October/034442.html)
 - [How can I copy a Python string?](http://stackoverflow.com/questions/24804453/how-can-i-copy-a-python-string)
 - [About the changing id of a Python immutable string](http://stackoverflow.com/questions/24245324/about-the-changing-id-of-a-python-immutable-string/24245514#24245514)
