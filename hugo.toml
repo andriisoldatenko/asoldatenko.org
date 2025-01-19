@@ -7,15 +7,16 @@ languageCode = "en-us"
 # This defines how dates are formatted
 defaultContentLanguage = "en-gb"
 
+# Enable emojis globally
+enableEmoji = true
+ignoreErrors = ["additional-script-loading-error"] # ignore error of loading additional scripts.
+ignoreLogs = ['additional-script-loading-error']
+
 # modern way: pull in theme component as hugo module
 [module]
   [[module.imports]]
     path = "github.com/hugo-sid/hugo-blog-awesome"
 
-# Enable emojis globally
-enableEmoji = true
-ignoreErrors = ["additional-script-loading-error"] # ignore error of loading additional scripts.
-ignoreLogs = ['additional-script-loading-error']
 
 [services]
   # To enable Google Analytics 4 (gtag.js) provide G-MEASUREMENT_ID below.
