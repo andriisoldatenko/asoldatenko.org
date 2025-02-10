@@ -56,8 +56,7 @@ OS/Arch:      linux/arm64
 #### podman init machine
 
 ```bash
-podman machine init podman-machine-custom \ 
-  --disk-size 60 \
+podman machine init --disk-size 60 \
   --rootful --cpus=4 \
   --memory=8192 \
   --image https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/40.20241019.3.0/aarch64/fedora-coreos-40.20241019.3.0-applehv.aarch64.raw.gz
@@ -117,13 +116,12 @@ create dir if it doesn't exist and add config:
 
 ```bash
 root@localhost:~$ mkdir -p $HOME/.config/containers/
-root@localhost:~# vim $HOME/.config/containers/registries.conf
+root@localhost:~$ vi $HOME/.config/containers/registries.conf
 ```
 
 with content:
 
 ```bash
-cat $HOME/.config/containers/registries.conf
 short-name-mode="permissive"
 unqualified-search-registries = ['docker.io']
 ```
