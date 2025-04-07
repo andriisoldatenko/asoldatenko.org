@@ -61,8 +61,6 @@ tags:
 - pipeCD
 ---
 
-# Intro
-
 In this article, I'll document notes from [kubecon](https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/)
 talks, I've attended and some interesting ideas or tools I found useful.
 
