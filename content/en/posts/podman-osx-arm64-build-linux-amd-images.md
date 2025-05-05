@@ -1,5 +1,5 @@
 ---
-title: "Build amd64 images using podman 3.5.x on OSX with arm64"
+title: "Build amd64 images using podman 5.3.x and 5.4.x on OSX with arm64"
 date:  2025-01-14T11:53:58+01:00
 description: "Podman Osx Arm64 Build Linux Amd Images"
 toc: false
@@ -14,11 +14,28 @@ categories:
 - sequoia
 ---
 
+> UPDATE: for podman 5.4.x version
+
+```bash
+brew upgrade podman
+podman --version
+5.4.2
+```
+
+New image from https://builds.coreos.fedoraproject.org/browser?stream=stable&arch=x86_64, because default one still
+doesn't work for me:
+
+```bash
+podman machine init podman-machine-custom --disk-size 60 \
+  --rootful --cpus=4 \
+  --memory=8192 \
+  --image https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/42.20250410.3.2/aarch64/fedora-coreos-42.20250410.3.2-applehv.aarch64.raw.gz
+```
 
 
 ## Problem
 
-You like me want to use podman on OSX (15.2 Sequoia) and build images for `--platform=linux/amd64` :)
+You like me to want to use podman on OSX (15.2 Sequoia) and build images for `--platform=linux/amd64` :)
 
 Welcome to my world!
 
