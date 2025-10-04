@@ -36,3 +36,8 @@ categories:
 > we should not pass up our opportunities in that critical 3%."
 >
 > — Donald Knuth
+
+### More Good Programming Quotes
+
+
+source https://henrikwarne.com/2016/04/17/more-good-programming-quotes/

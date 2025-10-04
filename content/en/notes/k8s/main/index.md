@@ -46,6 +46,17 @@ Quoting from [What is the role of 'pause' container?](https://groups.google.com/
 
 > When you specify the resource limit for containers in a Pod, the kubelet enforces those limits so that the running containers are not allowed to use more of those resources than the limits you set.
 
+
+## Out-of-memory (OOM) in Kubernetes
+- [Part 1: Intro and topics discussed](https://mihai-albert.com/2022/02/13/out-of-memory-oom-in-kubernetes-part-1-intro-and-topics-discussed/)
+
+TBD
+
+- [Part 4: Pod evictions, OOM scenarios and flows leading to them](https://mihai-albert.com/2022/02/13/out-of-memory-oom-in-kubernetes-part-4-pod-evictions-oom-scenarios-and-flows-leading-to-them/)
+
+TBD
+
+
 ### Random favorite links
 
 - https://hrishi.dev/kubernetes,/client-go/2020/11/24/mock-the-watch-api.html
