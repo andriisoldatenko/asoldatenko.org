@@ -10,7 +10,7 @@ categories:
 
 ## Intro
 
-I use [`keynote`](https://www.apple.com/in/keynote/) to present, because it simple and it's default on OSX which i use for writing code.
+I use [`keynote`](https://www.apple.com/in/keynote/) to present, because it is simple and it's default on OSX which i use for writing code.
 I tried different tools, but i sticked with it for last 12 years or so for [all my talks](/pages/talks/).
 
 
