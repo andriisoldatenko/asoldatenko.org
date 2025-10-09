@@ -28,7 +28,7 @@ Then I discovered RTF format / output:
 > RTF (Rich Text Format) is a Microsoft-developed, cross-platform file format that allows for document interchange between different word processors and operating systems.
 
 It's when we copy something and paste to keynote
-it paste it as text but keep formating.
+it pastes it as text but keeps formatting.
 
 Assuming I have a `Dockerfile` locally and if i run:
 
