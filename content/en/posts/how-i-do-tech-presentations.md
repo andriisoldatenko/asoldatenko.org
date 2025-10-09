@@ -47,7 +47,7 @@ and paste to keynote:
 ## Share terminal on the stage
 
 Usually when you do presentation, the default setup is either extend your screen or mirror screen.
-And of course you need your presenter notes, otherwise you remember everything. So the only option
+And of course you need your presenter notes, unless you remember everything. So the only option
 for me is extending screens. But if you want to share your terminal application, you are in trouble.
 Because you need to switch to mirror screen, and usually it slows you down. 
 
