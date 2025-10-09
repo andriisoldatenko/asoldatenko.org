@@ -53,7 +53,7 @@ Because you need to switch to mirror screen, and usually it slows you down.
 
 What I realized recently is—you can create two terminals and mirror what you are typing in one terminal into another one. 
 In this case, you can keep extended screens and switch between slides and terminal quickly.
-Big benefit you see what you type, also it's important to move the second terminal on extended screen.
+A big benefit is that you see what you type. Also, it's important to move the second terminal onto the extended screen.
 
 Okay, let's show you what it looks like. By the way, there are few ways of doing it.
 
