@@ -2,6 +2,7 @@
 title: "About Me"
 sidebar: true
 weight: 1
+toc: false
 ---
 
 My name is Andrii Soldatenko. I am a software engineer originally from Ukraine 🇺🇦, currently living in 🇦🇹 .
