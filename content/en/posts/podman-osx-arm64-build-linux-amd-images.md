@@ -115,7 +115,7 @@ version:
 
 ### Next, if you see a problem during podman build while pulling images
 
-```text
+```bash
 Error: short-name "go:latest" did not resolve to an alias and no unqualified-search registries are defined in "/etc/containers/registries.conf"
 
 // or

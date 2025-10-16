@@ -14,7 +14,7 @@ We have basic go program which has some C dependency, so we need to complie it u
 
 We have podman running on dev machine (at time of writing typically is OSX with arm architecture):
 
-```bash
+```
 uname -a | tr ";" "\n"
 Darwin hostname 24.4.0 Darwin Kernel Version 24.4.0: Wed Mar 19 21:16:34 PDT 2025; 
 root:xnu-11417.101.15~1/RELEASE_ARM64_T6000 arm64

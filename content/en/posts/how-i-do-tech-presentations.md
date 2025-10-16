@@ -32,8 +32,8 @@ it pastes it as text but keeps formatting.
 
 Assuming I have a `Dockerfile` locally and if i run:
 
-```
-pygmentize -f rtf Dockerfile | pbcopy
+```bash
+$ pygmentize -f rtf Dockerfile | pbcopy
 ```
 
 and paste to keynote:
