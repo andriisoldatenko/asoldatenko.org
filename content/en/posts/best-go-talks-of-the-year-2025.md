@@ -32,22 +32,10 @@ Already wrote a note about [why](../notes/watch-public-talks)
     "id": "8Rw-fVEjihw",
     "url": "https://www.youtube.com/watch?v=8Rw-fVEjihw"
   },
-  {
-    "title": "Building a coding agent from scratch - Bill Kennedy",
-    "viewCount": 2665,
-    "id": "ybBVOa572Tw",
-    "url": "https://www.youtube.com/watch?v=ybBVOa572Tw"
-  },
-//   {
-//     "title": "What's coming in Go 1.25 - Daniel Marti",
-//     "viewCount": 8267,
-//     "id": "0SX7zjE5cuI",
-//     "url": "https://www.youtube.com/watch?v=0SX7zjE5cuI"
-//   }
 ```
 ### What's coming in Go 1.25 - Daniel Marti
 
-full video -> https://www.youtube.com/watch?v=0SX7zjE5cuI
+full video -> [link](https://www.youtube.com/watch?v=0SX7zjE5cuI)
 slides -> https://docs.google.com/presentation/d/1ut3UVJLRAgR9G7otoR6IcqTkOcca9Pf1IsAJPRszMyU/edit?slide=id.g550f852d27_228_0#slide=id.g550f852d27_228_0
 
 * go.mode `ignore` directive https://go.dev/issue/42965
@@ -65,6 +53,31 @@ slides -> https://docs.google.com/presentation/d/1ut3UVJLRAgR9G7otoR6IcqTkOcca9P
 reading:
 - https://go.dev/blog/unique
 - future of Json in GO (GopherCon 2023) youtube (it's about new Go json v2)
+
+
+### Building a coding agent from scratch - Bill Kennedy
+
+- full video -> [📹](https://www.youtube.com/watch?v=ybBVOa572Tw)
+
+tl;dr
+* Bill guides us how to build coding agent in go (no deps except http client) 
+based on article [How to Build an Agent](https://ampcode.com/how-to-build-an-agent) by Thorsten Ball
+
+
+### Unleashing the Go Toolchain - Kemal Akkoyun
+
+full video -> [](https://www.youtube.com/watch?v=8Rw-fVEjihw)
+
+tl;dr
+
+* > "Programs must be written for people to read, and only incidentally for machines to execute"
+  > from Harold Abelson
+
+* logs (what happend)
+* metrics (how much and how fast)
+* traces (where did the time go?)
+
+
 
 ## GopherCon Europe Berlin 2025
 
