@@ -1,0 +1,24 @@
++++
+title = 'Certified Kubernetes Security [CKS] reading list'
+date = 2025-11-06T08:39:07+01:00
+draft = true
++++
+
+
+## Beginner
+
+### Minimize Microservices Vulnerabilities
+
+- [Pod Security Standards (PSP)](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
+- [pod spec](https://kubespec.dev/kubernetes/v1/Pod)
+- [Kubernetes-API PodSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#podspec-v1-core)
+- [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
+
+#### Admission controllers
+- [ImagePolicyWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
+
+#### Secrets
+- [Distribute Credentials Securely Using Secrets](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/)
+
+#### Cilium
+- []()
