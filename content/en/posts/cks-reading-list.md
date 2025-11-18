@@ -21,4 +21,5 @@ draft = true
 - [Distribute Credentials Securely Using Secrets](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/)
 
 #### Cilium
-- []()
+- [Layer 3 Examples](https://docs.cilium.io/en/stable/security/policy/language/)
+- [Transparent Encryption](https://docs.cilium.io/en/stable/security/network/encryption/#gsg-encryption)
