@@ -16,6 +16,10 @@ categories:
 
 ![Leonardo Bonacci](/assets/Fibonacci2.jpg)
 
+## History
+
+Originally Leonardo Bonacci created this sequence for model Rabbit populations.
+
 ## Quick introduction
 
 The idea of this article to collect eloquent python patterns using well-known
