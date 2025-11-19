@@ -23,3 +23,14 @@ draft = true
 #### Cilium
 - [Layer 3 Examples](https://docs.cilium.io/en/stable/security/policy/language/)
 - [Transparent Encryption](https://docs.cilium.io/en/stable/security/network/encryption/#gsg-encryption)
+
+#### Istio
+- [PeerAuthentication](https://istio.io/latest/docs/reference/config/security/peer_authentication/)
+
+
+### System Hardening
+
+- [Restrict a Container's Access to Resources with AppArmor](https://kubernetes.io/docs/tutorials/security/apparmor/)
+- [Container Runtimes](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)
+
+
