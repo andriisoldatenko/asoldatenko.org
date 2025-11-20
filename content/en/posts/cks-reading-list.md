@@ -109,3 +109,11 @@ sudo systemctl enable --now kubelet
 ```
 
 
+
+
+## Footnotes
+
+SELinux
+- [What is SELinux (Security-Enhanced Linux)](https://www.redhat.com/en/topics/linux/what-is-selinux)
+- [Check if SELinux is Enabled](https://docs.oracle.com/cd/E17952_01/mysql-5.7-en/selinux-checking.html)
+
