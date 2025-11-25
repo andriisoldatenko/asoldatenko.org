@@ -39,14 +39,20 @@ draft = false
 - [Runtime Class](https://kubernetes.io/docs/concepts/containers/runtime-class/)
 
 
+### Supply Chain Security
+
+- [kube-bench](https://github.com/aquasecurity/kube-bench)
+- [kube-bench installation](https://github.com/aquasecurity/kube-bench/blob/main/docs/installation.md)
+- [checkov](https://github.com/bridgecrewio/checkov)
+> [!NOTE]
+> Checkov is a static code analysis tool for infrastructure as code (IaC) and also a software composition analysis (SCA) tool for images and open source packages.
+- [Docker group security](https://github.com/zealvora/certified-kubernetes-security-specialist/blob/main/domain-5-supply-chain-security/docker-security.md#docker-group-security)
 
 ## Footnotes
 
 SELinux
 - [What is SELinux (Security-Enhanced Linux)](https://www.redhat.com/en/topics/linux/what-is-selinux)
 - [Check if SELinux is Enabled](https://docs.oracle.com/cd/E17952_01/mysql-5.7-en/selinux-checking.html)
-
-
 
 ### Install containerd and k8s 1.32 on ubuntu 24.04
 
