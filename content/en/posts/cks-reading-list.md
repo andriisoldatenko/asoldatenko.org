@@ -48,6 +48,16 @@ draft = false
 > Checkov is a static code analysis tool for infrastructure as code (IaC) and also a software composition analysis (SCA) tool for images and open source packages.
 - [Docker group security](https://github.com/zealvora/certified-kubernetes-security-specialist/blob/main/domain-5-supply-chain-security/docker-security.md#docker-group-security)
 
+
+### Monitoring, Logging and Runtime Security
+
+- [falco](https://falco.org/docs/)
+- [falco basic rules](https://falco.org/docs/concepts/rules/basic-elements/)
+- [sysdig](https://github.com/draios/sysdig)
+- [K8s Audit](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
+
+
+
 ## Footnotes
 
 SELinux
