@@ -1,6 +1,6 @@
 ---
 title: Eloquent fibonacci sequences in python
-date: 2016-12-31T21:30:00+02:00
+date: 2025-12-11T10:00:00+02:00
 tags: ["python", "tips", "tricks", "python3", "fibonacci"]
 categories:
 - python
@@ -11,15 +11,15 @@ categories:
 ---
 
 
+# TODO add why Fibonacci sequence is important
+for counting rabbit populations
+
 > "If by chance I have omitted anything more or less proper or necessary, I beg forgiveness, since there is no one who is without fault and circumspect in all matters."
 > ― Leonardo Bonacci - italian mathematician
 
-![Leonardo Bonacci](/assets/Fibonacci2.jpg)
-
 ## Quick introduction
 
-The idea of this article to collect eloquent python patterns using well-known
-Fibonacci sequence.
+The idea of this article to collect eloquent python solutions for generating Fibonacci sequence.
 
 ## Recursive approach
 
@@ -97,6 +97,47 @@ if __name__ == '__main__':
 $ python3 fibonacci_generator.py # On my MacBook Pro (Mid 2015) 2.5 GHz Intel Core i7, 16 GB 1600 MHz DDR3
 1.1730475709991879
 ```
+
+## Iterative approach
+
+```python
+
+```
+
+
+## Pisano period
+If you need to calculate huge fib number modulo m, you can use [Pisano period property](https://en.wikipedia.org/wiki/Pisano_period).
+
+tl;dr: The sequence of Fibonacci numbers taken modulo m is periodic. The length of the period is called the Pisano period.
+
+here is python implementation:
+
+```python
+def get_fibonacci_huge(n, m):
+    if n <= 1:
+        return n
+
+    arr = [0, 1]
+    previousMod = 0
+    currentMod = 1
+
+    for i in range(n - 1):
+        tempMod = previousMod
+        previousMod = currentMod % m
+        currentMod = (tempMod + currentMod) % m
+        arr.append(currentMod)
+        if currentMod == 1 and previousMod == 0:
+            index = (n % (i + 1))
+            return arr[index]
+```
+
+
+## Fast implementation using matrix exponentiation
+
+```python
+```
+# https://stackoverflow.com/questions/18172257/efficient-calculation-of-fibonacci-series/23462371#23462371
+
 
 ## About timeit instead of conclusion
 
