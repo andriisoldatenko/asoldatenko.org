@@ -2,6 +2,7 @@
 title: Eloquent fibonacci sequences in python
 date: 2025-12-11T10:00:00+02:00
 tags: ["python", "tips", "tricks", "python3", "fibonacci"]
+toc: true
 categories:
 - python
 - tips 
@@ -10,22 +11,12 @@ categories:
 - fibonacci
 ---
 
-
-# TODO add why Fibonacci sequence is important
-for counting rabbit populations
-
-> "If by chance I have omitted anything more or less proper or necessary, I beg forgiveness, since there is no one who is without fault and circumspect in all matters."
-> ― Leonardo Bonacci - italian mathematician
-
 ## Quick introduction
 
-The idea of this article to collect eloquent python solutions for generating Fibonacci sequence.
+The idea of this article to collect eloquent python solutions for generating Fibonacci sequence and/or
+related problems.
 
 ## Recursive approach
-
-```bash
-cat fibonacci1.py
-```
 
 ```python
 def fibonacci1(n):
@@ -45,13 +36,9 @@ $ python3 fibonacci1_bench.py # On my MacBook Pro (Mid 2015) 2.5 GHz Intel Core 
 
 ## Recursive approach using caching
 
-My favorite advice: you should know you language standard library.
-You can find lot's of info under [functools](https://docs.python.org/3/library/functools.html#functools.lru_cache) module docs.
+My favorite advice: you should know your language standard library.
+You can find lots of info under [functools](https://docs.python.org/3/library/functools.html#functools.lru_cache) module docs.
 Default `maxsize` is `128` for `lru_cache` decorator.
-
-```bash
-cat fibonacci2.py
-```
 
 ```python
 import functools
@@ -70,15 +57,27 @@ if __name__ == '__main__':
 ```
 
 ```bash
-$ python3 fibonacci2_bench.py # On my MacBook Pro (Mid 2015) 2.5 GHz Intel Core i7, 16 GB 1600 MHz DDR3
+$ python3 fibonacci2_bench.py
 0.09731649799505249
 ```
 
-```bash
-cat fibonacci_generator.py
+## Iterative approach
+
+```python
+def fibonacci_iterative(n):
+    if n <= 1:
+        return n
+
+    previous = 0
+    current = 1
+
+    for _ in range(n - 1):
+        previous, current = current, previous + current
+
+    return current
 ```
 
-## Generator approach for using yield
+or more pythonic way using generators:
 
 ```python
 def fibonacci_generator():
@@ -94,18 +93,12 @@ if __name__ == '__main__':
 ```
 
 ```bash
-$ python3 fibonacci_generator.py # On my MacBook Pro (Mid 2015) 2.5 GHz Intel Core i7, 16 GB 1600 MHz DDR3
+$ python3 fibonacci_generator.py
 1.1730475709991879
 ```
 
-## Iterative approach
-
-```python
-
-```
-
-
 ## Pisano period
+
 If you need to calculate huge fib number modulo m, you can use [Pisano period property](https://en.wikipedia.org/wiki/Pisano_period).
 
 tl;dr: The sequence of Fibonacci numbers taken modulo m is periodic. The length of the period is called the Pisano period.
@@ -131,13 +124,12 @@ def get_fibonacci_huge(n, m):
             return arr[index]
 ```
 
-
 ## Fast implementation using matrix exponentiation
 
 ```python
 ```
-# https://stackoverflow.com/questions/18172257/efficient-calculation-of-fibonacci-series/23462371#23462371
 
+# https://stackoverflow.com/questions/18172257/efficient-calculation-of-fibonacci-series/23462371#23462371
 
 ## About timeit instead of conclusion
 
