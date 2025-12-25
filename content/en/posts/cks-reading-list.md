@@ -206,6 +206,8 @@ Exam tasks:
 #### Admission controllers
 
 - [ImagePolicyWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
+- [NodeRestriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction)
+
 
 #### Secrets
 
