@@ -15,7 +15,12 @@ draft = false
 - [CKS_Curriculum](https://github.com/cncf/curriculum/blob/master/CKS_Curriculum%20v1.34.pdf)
 - Tools which are installed during exam:
   - [vim](#setup-vim)
-  - 
+- videos:
+  - [Kubernetes CKS Full Course Theory + Practice + Browser Scenarios](https://www.youtube.com/watch?v=d9xfB5qaOfg)
+- practise:
+  - killer.sh
+  - killer Koda
+- [CKS Tips Kubernetes 1.34](https://killer.sh/attendee/cef7d7f1-fca3-4052-bf76-ba374b710ec4/tips)
 
 ### Setup
 
@@ -25,6 +30,7 @@ Vim:
 set expandtab
 set tabstop=2
 set shiftwidth=2
+set numbers
 ```
 ### Practice, practice, practice
 
@@ -249,6 +255,7 @@ Exam tasks:
 SELinux
 - [What is SELinux (Security-Enhanced Linux)](https://www.redhat.com/en/topics/linux/what-is-selinux)
 - [Check if SELinux is Enabled](https://docs.oracle.com/cd/E17952_01/mysql-5.7-en/selinux-checking.html)
+- [Issue a Certificate for a Kubernetes API Client Using A CertificateSigningRequest](https://kubernetes.io/docs/tasks/tls/certificate-issue-client-csr/)
 
 ### Install containerd and k8s 1.32 on ubuntu 24.04
 
