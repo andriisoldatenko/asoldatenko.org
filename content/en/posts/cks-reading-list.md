@@ -1,9 +1,11 @@
-+++
-title = 'Kubernetes Security reading list'
-date = 2025-11-06T08:39:07+01:00
-draft = false
-+++
-
+---
+title: Kubernetes Security reading list
+date: 2025-11-06T08:39:07+01:00
+tags: ["cks"]
+categories:
+- cks
+- k8s
+---
 
 ## About exam
 
@@ -37,6 +39,14 @@ set numbers
 - https://killercoda.com/killer-shell-cks/scenario/apiserver-misconfigured
 
 
+### Mostly used articles during solving problems by me
+- [Encrypting Confidential Data at Rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/)
+- [Auditing](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
+- [Restrict a Container's Syscalls with seccomp](https://kubernetes.io/docs/tutorials/security/seccomp/)
+- [Configure Service Accounts for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
+
+
+
 ### Cluster setup (15%)
 
 - [Use Network security policies to restrict cluster level access](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
@@ -61,7 +71,7 @@ set numbers
 - Exercise caution in using service accounts e.g. 
 [disable defaults](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server)
 minimize permissions on newly created ones
-- [Restrict access to Kubernetes API]((https://kubernetes.io/docs/reference/access-authn-authz/controlling-access/))
+- [Restrict access to Kubernetes API](https://kubernetes.io/docs/reference/access-authn-authz/controlling-access/))
 - Upgrade Kubernetes to avoid vulnerabilities
 
 Related materials:
