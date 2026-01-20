@@ -26,13 +26,23 @@ categories:
 
 ### Setup
 
-Vim:
+tmux:
+
+```bash
+# vim ~/.tmux.conf
+set -g prefix C-f
+unbind C-b
+bind C-f send-prefix
+set-window-option -g mode-keys vi
 ```
+
+Vim:
+
+```bash
 # vim ~/.vimrc
 set expandtab
 set tabstop=2
 set shiftwidth=2
-set numbers
 ```
 ### Practice, practice, practice
 
@@ -46,6 +56,18 @@ set numbers
 - [Configure Service Accounts for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
 
 
+
+### Tips:
+
+Verify checksum of many binaries:
+```bash
+cat sha.txt
+sha file
+```
+
+```bash
+sha512sum -c sha.txt
+```
 
 ### Cluster setup (15%)
 
