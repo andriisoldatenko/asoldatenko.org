@@ -15,8 +15,6 @@ categories:
 - Certification validity: two (2) years
 - Prerequisite: valid CKA
 - [CKS_Curriculum](https://github.com/cncf/curriculum/blob/master/CKS_Curriculum%20v1.34.pdf)
-- Tools which are installed during exam:
-  - [vim](#setup-vim)
 - videos:
   - [Kubernetes CKS Full Course Theory + Practice + Browser Scenarios](https://www.youtube.com/watch?v=d9xfB5qaOfg)
 - practise:
@@ -24,27 +22,6 @@ categories:
   - killer Koda
 - [CKS Tips Kubernetes 1.34](https://killer.sh/attendee/cef7d7f1-fca3-4052-bf76-ba374b710ec4/tips)
 
-
-### TIPs
-
-Refresh yaml structure using `k explain pods.spec`:
-
-```bash
-root@k8s:~# k explain pods.spec | grep -C5 nodeName
-    then using the max of of that value or the sum of the normal containers.
-    Limits are applied to init containers in a similar fashion. Init containers
-    cannot currently be added or removed. Cannot be updated. More info:
-    https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
-
-  nodeName      <string>
-    NodeName indicates in which node this pod is scheduled. If empty, this pod
-    is a candidate for scheduling by the scheduler defined in schedulerName.
-    Once this field is set, the kubelet for this node becomes responsible for
-    the lifecycle of this pod. This field should not be used to express a desire
-    for the pod to be scheduled on a specific node.
-
-root@k8s:~# k explain deployments.spec.template.spec
-```
 
 ### Setup
 
@@ -93,6 +70,24 @@ sha file
 sha512sum -c sha.txt
 ```
 
+Refresh yaml structure using `k explain pods.spec`:
+```bash
+root@k8s:~# k explain pods.spec | grep -C5 nodeName
+    then using the max of of that value or the sum of the normal containers.
+    Limits are applied to init containers in a similar fashion. Init containers
+    cannot currently be added or removed. Cannot be updated. More info:
+    https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+
+  nodeName      <string>
+    NodeName indicates in which node this pod is scheduled. If empty, this pod
+    is a candidate for scheduling by the scheduler defined in schedulerName.
+    Once this field is set, the kubelet for this node becomes responsible for
+    the lifecycle of this pod. This field should not be used to express a desire
+    for the pod to be scheduled on a specific node.
+
+root@k8s:~# k explain deployments.spec.template.spec
+```
+
 ### Cluster setup (15%)
 
 - [Use Network security policies to restrict cluster level access](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
@@ -100,8 +95,6 @@ sha512sum -c sha.txt
 - Properly set up Ingress objects with TLS
 - [Protect node metadata and endpoints](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/#restricting-cloud-metadata-api-access)
   - Setting up secure endpoints in Kubernetes
-- [Verify platform binaries before deploying](https://github.com/kubernetes/kubernetes/releases)
-
 **Related materials:**
 * [Securing a Cluster](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/)
 * [Kube-bench](https://github.com/aquasecurity/kube-bench)
@@ -122,30 +115,6 @@ minimize permissions on newly created ones
 
 Related materials:
 * [Control anonymous requests to Kube-apiserver](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#anonymous-requests)
-* [Handy site collects together articles, tools and the official documentation all in one place](https://rbac.dev/)
-* [Simplify Kubernetes Resource Access Control using RBAC Impersonation](https://docs.bitnami.com/tutorials/simplify-kubernetes-resource-access-rbac-impersonation/)
-   <details><summary> :clipboard: Opt out of automounting API credentials for a service account </summary>
-
-   #### Opt out at service account scope
-   ```yaml
-   apiVersion: v1
-   kind: ServiceAccount
-   metadata:
-     name: build-robot
-   automountServiceAccountToken: false
-   ```
-   #### Opt out at pod scope
-   ```yaml
-   apiVersion: v1
-   kind: Pod
-   metadata:
-     name: cks-pod
-   spec:
-     serviceAccountName: default
-     automountServiceAccountToken: false
-   ```
-
-   </details>
 
 
 ### System Hardening (10%)
@@ -321,13 +290,13 @@ https://github.com/zealvora/certified-kubernetes-security-specialist/blob/main/d
 
 
 2. Install containerd 
-```
+```bash
 sudo apt-get update
 sudo apt-get install containerd
 ```
 
 3. Check
-```
+```bash
 # check
 ctr
 
@@ -336,7 +305,7 @@ runc
 ```
 
 4. Install kubeadm
-```
+```bash
 sudo apt-get update
 
 # apt-transport-https may be a dummy package; if so, you can skip that package
@@ -352,7 +321,6 @@ echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
-
 
 sudo systemctl enable --now kubelet
 ```
