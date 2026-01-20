@@ -24,6 +24,28 @@ categories:
   - killer Koda
 - [CKS Tips Kubernetes 1.34](https://killer.sh/attendee/cef7d7f1-fca3-4052-bf76-ba374b710ec4/tips)
 
+
+### TIPs
+
+Refresh yaml structure using `k explain pods.spec`:
+
+```bash
+root@k8s:~# k explain pods.spec | grep -C5 nodeName
+    then using the max of of that value or the sum of the normal containers.
+    Limits are applied to init containers in a similar fashion. Init containers
+    cannot currently be added or removed. Cannot be updated. More info:
+    https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+
+  nodeName      <string>
+    NodeName indicates in which node this pod is scheduled. If empty, this pod
+    is a candidate for scheduling by the scheduler defined in schedulerName.
+    Once this field is set, the kubelet for this node becomes responsible for
+    the lifecycle of this pod. This field should not be used to express a desire
+    for the pod to be scheduled on a specific node.
+
+root@k8s:~# k explain deployments.spec.template.spec
+```
+
 ### Setup
 
 tmux:
@@ -46,6 +68,8 @@ set shiftwidth=2
 ```
 ### Practice, practice, practice
 
+- or install your own cluster https://github.com/killer-sh/cks-course-environment/tree/master
+
 - https://killercoda.com/killer-shell-cks/scenario/apiserver-misconfigured
 
 
@@ -54,7 +78,7 @@ set shiftwidth=2
 - [Auditing](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
 - [Restrict a Container's Syscalls with seccomp](https://kubernetes.io/docs/tutorials/security/seccomp/)
 - [Configure Service Accounts for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
-
+- [Apply Pod Security Standards at the Namespace Level](https://kubernetes.io/docs/tutorials/security/ns-level-pss/)
 
 
 ### Tips:
