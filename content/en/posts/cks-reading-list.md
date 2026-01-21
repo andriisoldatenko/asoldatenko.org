@@ -56,6 +56,10 @@ set shiftwidth=2
 - [Restrict a Container's Syscalls with seccomp](https://kubernetes.io/docs/tutorials/security/seccomp/)
 - [Configure Service Accounts for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
 - [Apply Pod Security Standards at the Namespace Level](https://kubernetes.io/docs/tutorials/security/ns-level-pss/)
+- [kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/)
+  - [Configuring each kubelet in your cluster using kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/kubelet-integration/)
+  - [Customizing components with the kubeadm API](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/control-plane-flags/#patches)
+  - [Set Kubelet Parameters Via A Configuration File](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/) 
 
 
 ### Tips:
@@ -86,6 +90,15 @@ root@k8s:~# k explain pods.spec | grep -C5 nodeName
     for the pod to be scheduled on a specific node.
 
 root@k8s:~# k explain deployments.spec.template.spec
+```
+
+Update kubelet-config:
+```bash
+kubectl -n kube-system edit cm kubelet-config
+
+kubeadm upgrade node phase kubelet-config
+
+systemctl restart kubelet
 ```
 
 ### Cluster setup (15%)
