@@ -60,7 +60,7 @@ set shiftwidth=2
   - [Configuring each kubelet in your cluster using kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/kubelet-integration/)
   - [Customizing components with the kubeadm API](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/control-plane-flags/#patches)
   - [Set Kubelet Parameters Via A Configuration File](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/) 
-
+- [Generate Certificates Manually](https://kubernetes.io/docs/tasks/administer-cluster/certificates/)
 
 ### Tips:
 
@@ -91,6 +91,52 @@ root@k8s:~# k explain pods.spec | grep -C5 nodeName
 
 root@k8s:~# k explain deployments.spec.template.spec
 ```
+
+Falco ([supported_fields](https://falco.org/docs/reference/rules/supported-fields/)):
+
+```bash
+# it can take a bit till Falco displays output, use falco -U/--unbuffered to speed up
+falco -U | grep <>
+```
+
+Cri-O
+
+```bash
+crictl ps
+
+crictl ps -n1 # show only latest running container
+
+crictl ps -id f86cd629e71c
+
+crictl pods -id cab6dafd045d5
+```
+
+
+BOM
+
+```bash
+bom generate --image registry.k8s.io/kube-apiserver:v1.31.0 --format json
+```
+
+Trivy
+
+```bash
+trivy image --help | grep format
+  $ trivy image --format json --output result.json alpine:3.15
+  # Generate a report in the CycloneDX format
+  $ trivy image --format cyclonedx --output result.cdx alpine:3.15
+  -f, --format string              format (table,json,template,sarif,cyclonedx,spdx,spdx-json,github,cosign-vuln) (default "table")
+...
+```
+
+
+openssl
+
+```bash
+# View the certificate signing request
+openssl req -in new.csr -noout -text
+```
+
 
 Update kubelet-config:
 ```bash
