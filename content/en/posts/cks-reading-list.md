@@ -109,6 +109,16 @@ crictl ps -n1 # show only latest running container
 crictl ps -id f86cd629e71c
 
 crictl pods -id cab6dafd045d5
+
+crictl pods --name collector1
+
+crictl inspect <CONTAINER ID>
+```
+
+Using the PIDs we can call strace to find [Syscalls](https://man7.org/linux/man-pages/man2/syscalls.2.html):
+
+```bash
+strace -p 14079 | grep -i kill
 ```
 
 
@@ -146,6 +156,46 @@ kubeadm upgrade node phase kubelet-config
 
 systemctl restart kubelet
 ```
+
+Upgrade k8s version and components on nodes e.g. from `v1.33.4` to `v1.34.1`:
+
+```bash
+# show k8s versions
+k get node
+
+k drain <node-name> --ignore-daemonsets
+
+kubelet --version
+kubeadm version
+
+# not necessary because here kubeadm is already installed in correct version
+apt-mark unhold kubeadm
+apt-mark hold kubectl kubelet
+apt install kubeadm=1.34.1-1.1
+apt-mark hold kubeadm
+
+kubeadm upgrade plan
+
+kubeadm upgrade apply v1.34.1
+
+# to check it run again
+kubeadm upgrade plan
+
+# kubelet and kubectl
+
+apt update
+apt show kubelet | grep 1.34.1
+apt install kubelet=1.34.1-1.1 kubectl=1.34.1-1.1
+
+apt-mark hold kubelet kubectl
+
+service kubelet restart
+service kubelet status
+
+k get node
+k uncordon <node-name>
+```
+
 
 ### Cluster setup (15%)
 
