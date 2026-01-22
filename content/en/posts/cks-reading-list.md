@@ -20,6 +20,8 @@ categories:
 - practise:
   - killer.sh
   - killer Koda
+  - https://github.com/zealvora/certified-kubernetes-security-specialist/
+  - https://github.com/jangroth/kubernetes-certification-notes/blob/main/cks/studycard.md#1-cluster-setup
 - [CKS Tips Kubernetes 1.34](https://killer.sh/attendee/cef7d7f1-fca3-4052-bf76-ba374b710ec4/tips)
 
 
@@ -64,7 +66,17 @@ set shiftwidth=2
 
 ### Tips:
 
-Verify checksum of many binaries:
+Verify checksum of many binaries (search `shasum` k8s docs): 
+
+If you see:
+```bash
+shasum: standard input: no properly formatted SHA checksum lines found
+```
+It must be 2 spaces between sha end binary path!!! if you want to compare in one line:
+```bash
+echo "$(cat kube-apiserver.sha256)  kube-apiserver" | shasum -a 256 --check
+```
+
 ```bash
 cat sha.txt
 sha file
@@ -125,7 +137,7 @@ strace -p 14079 | grep -i kill
 BOM
 
 ```bash
-bom generate --image registry.k8s.io/kube-apiserver:v1.31.0 --format json
+bom generate --image registry.k8s.io/kube-apiserver:v1.31.0 --format json --output nginx.spdx.json
 ```
 
 Trivy
