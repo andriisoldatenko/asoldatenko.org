@@ -51,11 +51,21 @@ set shiftwidth=2
 
 - https://killercoda.com/killer-shell-cks/scenario/apiserver-misconfigured
 
+### Domains & Weighting
+
+| Domain                  | Weight |
+|-------------------------|--------|
+| Cluster Setup           | 10% |
+| Cluster Hardening       | 15% |
+| System Hardening        | 15% |
+| Minimize Microservice Vulnerabilities | 20% |
+| Supply Chain Security   | 20% |
+| Monitoring, Logging and Runtime Security | 20% |
+
 
 ### Mostly used articles during solving problems by me
 - [Encrypting Confidential Data at Rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/)
 - [Auditing](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
-- [Restrict a Container's Syscalls with seccomp](https://kubernetes.io/docs/tutorials/security/seccomp/)
 - [Configure Service Accounts for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
 - [Apply Pod Security Standards at the Namespace Level](https://kubernetes.io/docs/tutorials/security/ns-level-pss/)
 - [kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/)
@@ -63,6 +73,15 @@ set shiftwidth=2
   - [Customizing components with the kubeadm API](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/control-plane-flags/#patches)
   - [Set Kubelet Parameters Via A Configuration File](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/) 
 - [Generate Certificates Manually](https://kubernetes.io/docs/tasks/administer-cluster/certificates/)
+- https://github.com/bmuschko/cks-study-guide/blob/master/app-b/exam-review-guide.adoc
+
+System Hardening:
+- [Restrict a Container's Access to Resources with AppArmor](https://kubernetes.io/docs/tutorials/security/apparmor/)
+- [Container Runtimes](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)
+- [Runtime Class](https://kubernetes.io/docs/concepts/containers/runtime-class/)
+- [Restrict a Container's Syscalls with seccomp](https://kubernetes.io/docs/tutorials/security/seccomp/)
+- [Using sysctls in a Kubernetes Cluster](https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/)
+
 
 ### Tips:
 
@@ -374,11 +393,7 @@ Exam tasks:
 
 - [PeerAuthentication](https://istio.io/latest/docs/reference/config/security/peer_authentication/)
 
-### System Hardening
 
-- [Restrict a Container's Access to Resources with AppArmor](https://kubernetes.io/docs/tutorials/security/apparmor/)
-- [Container Runtimes](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)
-- [Runtime Class](https://kubernetes.io/docs/concepts/containers/runtime-class/)
 
 ### Supply Chain Security
 
