@@ -8,27 +8,18 @@ categories:
 ---
 
 ## About exam
-
-- Duration : 2 hours
-- Number of questions: 15-20 hands-on performance based tasks
-- Passing score: 67%
-- Certification validity: two (2) years
-- Prerequisite: valid CKA
-- [CKS_Curriculum](https://github.com/cncf/curriculum/blob/master/CKS_Curriculum%20v1.34.pdf)
-- videos:
-  - [Kubernetes CKS Full Course Theory + Practice + Browser Scenarios](https://www.youtube.com/watch?v=d9xfB5qaOfg)
-- practise:
-  - killer.sh
-  - killer Koda
-  - https://github.com/zealvora/certified-kubernetes-security-specialist/
-  - https://github.com/jangroth/kubernetes-certification-notes/blob/main/cks/studycard.md#1-cluster-setup
-- [CKS Tips Kubernetes 1.34](https://killer.sh/attendee/cef7d7f1-fca3-4052-bf76-ba374b710ec4/tips)
+|                            | <!-- --> |
+|----------------------------|----------|
+| Duration                   | 2 hours  |
+| Number of questions: 15-20 | 15-20    |
+| Passing score              | 67%      |
+|    Prerequisite                        | CKA      |
+ | [CKS_Curriculum](https://github.com/cncf/curriculum/blob/master/CKS_Curriculum%20v1.34.pdf) | |
 
 
 ### Setup
 
 Vim:
-
 ```bash
 echo "set ai et sw=2 ts=2 sts=2" > ~/.vimrc
 ```
@@ -38,31 +29,16 @@ echo "set ai et sw=2 ts=2 sts=2" > ~/.vimrc
 `sts` = shifttabstop
 `ts` = tabspace
 
-
-### Practice, practice, practice
-
-- or install your own cluster https://github.com/killer-sh/cks-course-environment/tree/master
-- https://killercoda.com/killer-shell-cks/scenario/apiserver-misconfigured
-
-- [x] https://github.com/ramanagali/Interview_Guide/blob/main/CKS_Preparation_Guide.md
-- [x] https://github.com/ViktorUJ/cks/blob/master/tasks/cks/mock/01/README.MD
-- [ ] https://github.com/ViktorUJ/cks/blob/master/tasks/cks/mock/02/README.MD
-- [ ] https://github.com/ViktorUJ/cks/blob/master/tasks/cks/mock/03/README.MD
-- [ ] https://github.com/ViktorUJ/cks/blob/master/tasks/cks/mock/04/README.MD
-- [ ] killer_shell_a (html dump)
-- [ ] killer_shell_b (html dump)
-- [ ] https://killercoda.com/killer-shell-cks/
-
 ### Domains & Weighting
 
-| Domain                  | Weight |
-|-------------------------|--------|
-| Cluster Setup           | 10% |
-| Cluster Hardening       | 15% |
-| System Hardening        | 15% |
-| Minimize Microservice Vulnerabilities | 20% |
-| Supply Chain Security   | 20% |
-| Monitoring, Logging and Runtime Security | 20% |
+| Domain                                     | Weight |
+|--------------------------------------------|--------|
+| * Cluster Setup                            | 10%    |
+| * Cluster Hardening                        | 15%    |
+| * System Hardening                         | 15%    |
+| * Minimize Microservice Vulnerabilities    | 20%    |
+| * Supply Chain Security                    | 20%    |
+| * Monitoring, Logging and Runtime Security | 20%    |
 
 
 ### Mostly used articles during solving problems by me
@@ -81,6 +57,13 @@ echo "set ai et sw=2 ts=2 sts=2" > ~/.vimrc
 - [Distribute Credentials Securely Using Secrets](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/)
 - [JSONPath Support](https://kubernetes.io/docs/reference/kubectl/jsonpath/)
 - [kubectl quick reference](https://kubernetes.io/docs/reference/kubectl/quick-reference/)
+
+Cilium:
+- [Layer 3 Examples](https://docs.cilium.io/en/stable/security/policy/language/)
+- [Transparent Encryption](https://docs.cilium.io/en/stable/security/network/encryption/#gsg-encryption)
+
+Istio:
+- [Istio PeerAuthentication](https://istio.io/latest/docs/reference/config/security/peer_authentication/)
 
 ### Cluster setup 10%:
 
@@ -123,6 +106,49 @@ minimize permissions on newly created ones
 - [Open Policy Agent](https://kubernetes.io/blog/2019/08/06/opa-gatekeeper-policy-and-governance-for-kubernetes/)
 - [Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
 Use [container runtime](https://kubernetes.io/docs/concepts/containers/runtime-class/) sandboxes in multi-tenant environments (e.g. [gvisor, kata containers](https://github.com/kubernetes/enhancements/blob/5dcf841b85f49aa8290529f1957ab8bc33f8b855/keps/sig-node/585-runtime-class/README.md#examples))
+- - [Pod Security Standards (PSP)](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
+- [pod spec](https://kubespec.dev/kubernetes/v1/Pod)
+- [Kubernetes-API PodSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#podspec-v1-core)
+- [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
+
+### Supply Chain Security (20%)
+
+- Secure your supply chain: [whitelist allowed image registries](https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/#why-do-i-need-admission-controllers), sign and validate images
+- Using [ImagePolicyWebhook admission Controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
+- Use static analysis of user workloads (e.g. [kubernetes resources](https://kubernetes.io/blog/2018/07/18/11-ways-not-to-get-hacked/#7-statically-analyse-yaml), docker files)
+- [Scan images for known vulnerabilities](https://kubernetes.io/blog/2018/07/18/11-ways-not-to-get-hacked/#10-scan-images-and-run-ids)
+- [Aqua security Trivy]( https://github.com/aquasecurity/trivy)
+- - [ImagePolicyWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
+- [NodeRestriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction)
+- - [kube-bench](https://github.com/aquasecurity/kube-bench)
+- [kube-bench installation](https://github.com/aquasecurity/kube-bench/blob/main/docs/installation.md)
+- [checkov](https://github.com/bridgecrewio/checkov)
+> [!NOTE]
+> Checkov is a static code analysis tool for infrastructure as code (IaC) and also a software composition analysis (SCA) tool for images and open source packages.
+- [Docker group security](https://github.com/zealvora/certified-kubernetes-security-specialist/blob/main/domain-5-supply-chain-security/docker-security.md#docker-group-security)
+
+### Monitoring, Logging and Runtime Security
+
+- [falco](https://falco.org/docs/)
+- [falco basic rules](https://falco.org/docs/concepts/rules/basic-elements/)
+- [sysdig](https://github.com/draios/sysdig)
+- [K8s Audit](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
+  Perform behavioural analytics of syscall process and file activities at the host and container level to detect malicious activities
+  - [Falco installation guide](https://falco.org/docs/)
+  - :triangular_flag_on_post: [Sysdig Falco 101](https://learn.sysdig.com/falco-101)
+  - :triangular_flag_on_post: [Falco Helm Chart](https://github.com/falcosecurity/charts/tree/master/falco)
+  - :triangular_flag_on_post: [Falco Kubernetes helmchart](https://github.com/falcosecurity/charts)
+  - :triangular_flag_on_post: [Detect CVE-2020-8557 using Falco](https://falco.org/blog/detect-cve-2020-8557/)
+    Detect threats within a physical infrastructure, apps, networks, data, users and workloads
+    Detect all phases of attack regardless where it occurs and how it spreads
+
+Perform deep analytical investigation and identification of bad actors within the environment
+- [Sysdig documentation](https://docs.sysdig.com/)
+- [Monitoring Kubernetes with sysdig](https://kubernetes.io/blog/2015/11/monitoring-kubernetes-with-sysdig/)
+- :triangular_flag_on_post: [CNCF Webinar: Getting started with container runtime security using Falco](https://youtu.be/VEFaGjfjfyc)
+  [Ensure immutability of containers at runtime](https://kubernetes.io/blog/2018/03/principles-of-container-app-design/)
+  [Use Audit Logs to monitor access](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
+
 
 ### Tips:
 
@@ -325,77 +351,6 @@ k get node
 k uncordon <node-name>
 ```
 
-### Supply Chain Security (20%)
-
-- Secure your supply chain: [whitelist allowed image registries](https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/#why-do-i-need-admission-controllers), sign and validate images
-- Using [ImagePolicyWebhook admission Controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
-- Use static analysis of user workloads (e.g. [kubernetes resources](https://kubernetes.io/blog/2018/07/18/11-ways-not-to-get-hacked/#7-statically-analyse-yaml), docker files)
-- [Scan images for known vulnerabilities](https://kubernetes.io/blog/2018/07/18/11-ways-not-to-get-hacked/#10-scan-images-and-run-ids)
-- [Aqua security Trivy]( https://github.com/aquasecurity/trivy)
-
-
-### Monitoring, Logging and Runtime Security (20%)
-
-Perform behavioural analytics of syscall process and file activities at the host and container level to detect malicious activities
-  - [Falco installation guide](https://falco.org/docs/)
-  - :triangular_flag_on_post: [Sysdig Falco 101](https://learn.sysdig.com/falco-101)
-  - :triangular_flag_on_post: [Falco Helm Chart](https://github.com/falcosecurity/charts/tree/master/falco)
-  - :triangular_flag_on_post: [Falco Kubernetes helmchart](https://github.com/falcosecurity/charts)
-  - :triangular_flag_on_post: [Detect CVE-2020-8557 using Falco](https://falco.org/blog/detect-cve-2020-8557/)
-Detect threats within a physical infrastructure, apps, networks, data, users and workloads
-Detect all phases of attack regardless where it occurs and how it spreads
-
-Perform deep analytical investigation and identification of bad actors within the environment
-  - [Sysdig documentation](https://docs.sysdig.com/)
-  - [Monitoring Kubernetes with sysdig](https://kubernetes.io/blog/2015/11/monitoring-kubernetes-with-sysdig/)
-  - :triangular_flag_on_post: [CNCF Webinar: Getting started with container runtime security using Falco](https://youtu.be/VEFaGjfjfyc)
-[Ensure immutability of containers at runtime](https://kubernetes.io/blog/2018/03/principles-of-container-app-design/)
-[Use Audit Logs to monitor access](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/)
-
-
-
-### Minimize Microservices Vulnerabilities
-
-- [Pod Security Standards (PSP)](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
-- [pod spec](https://kubespec.dev/kubernetes/v1/Pod)
-- [Kubernetes-API PodSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#podspec-v1-core)
-- [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
-
-#### Admission controllers
-
-- [ImagePolicyWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
-- [NodeRestriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction)
-
-
-
-
-#### Cilium
-
-- [Layer 3 Examples](https://docs.cilium.io/en/stable/security/policy/language/)
-- [Transparent Encryption](https://docs.cilium.io/en/stable/security/network/encryption/#gsg-encryption)
-
-#### Istio
-
-- [PeerAuthentication](https://istio.io/latest/docs/reference/config/security/peer_authentication/)
-
-
-
-### Supply Chain Security
-
-- [kube-bench](https://github.com/aquasecurity/kube-bench)
-- [kube-bench installation](https://github.com/aquasecurity/kube-bench/blob/main/docs/installation.md)
-- [checkov](https://github.com/bridgecrewio/checkov)
-> [!NOTE]
-> Checkov is a static code analysis tool for infrastructure as code (IaC) and also a software composition analysis (SCA) tool for images and open source packages.
-- [Docker group security](https://github.com/zealvora/certified-kubernetes-security-specialist/blob/main/domain-5-supply-chain-security/docker-security.md#docker-group-security)
-
-### Monitoring, Logging and Runtime Security
-
-- [falco](https://falco.org/docs/)
-- [falco basic rules](https://falco.org/docs/concepts/rules/basic-elements/)
-- [sysdig](https://github.com/draios/sysdig)
-- [K8s Audit](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
-
 ## Footnotes
 
 SELinux
@@ -408,43 +363,6 @@ SELinux
 1. Create t3.small ec2 instance based on ubuntu, because we need atleast 2GB RAM for k8s.
 
 https://github.com/zealvora/certified-kubernetes-security-specialist/blob/main/domain-1-cluster-setup/kubeadm-install.md
-
-
-2. Install containerd 
-```bash
-sudo apt-get update
-sudo apt-get install containerd
-```
-
-3. Check
-```bash
-# check
-ctr
-
-# check runc
-runc
-```
-
-4. Install kubeadm
-```bash
-sudo apt-get update
-
-# apt-transport-https may be a dummy package; if so, you can skip that package
-sudo apt-get install -y apt-transport-https ca-certificates curl gpg
-
-# If the directory `/etc/apt/keyrings` does not exist, it should be created before the curl command, read the note below.
-# sudo mkdir -p -m 755 /etc/apt/keyrings
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-
-# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
-
-sudo apt-get update
-sudo apt-get install -y kubelet kubeadm kubectl
-sudo apt-mark hold kubelet kubeadm kubectl
-
-sudo systemctl enable --now kubelet
-```
 
 
 ### Related materials:
@@ -461,3 +379,21 @@ SELinux
 - https://github.com/stackrox/Kubernetes_Security_Specialist_Study_Guide#cluster-hardening---15
 - https://github.com/ramanagali/Interview_Guide/blob/main/CKS_Preparation_Guide.md
 - https://github.com/walidshaari/Certified-Kubernetes-Security-Specialist
+- https://github.com/zealvora/certified-kubernetes-security-specialist/
+- https://github.com/jangroth/kubernetes-certification-notes/blob/main/cks/studycard.md#1-cluster-setup
+- [CKS Tips Kubernetes 1.34](https://killer.sh/attendee/cef7d7f1-fca3-4052-bf76-ba374b710ec4/tips)
+- videos:
+  - [Kubernetes CKS Full Course Theory + Practice + Browser Scenarios](https://www.youtube.com/watch?v=d9xfB5qaOfg)
+- practise:
+  - killer.sh
+  - killer Koda
+  - or install your own cluster https://github.com/killer-sh/cks-course-environment/tree/master
+  - https://killercoda.com/killer-shell-cks/scenario/apiserver-misconfigured
+  - https://github.com/ramanagali/Interview_Guide/blob/main/CKS_Preparation_Guide.md
+  - https://github.com/ViktorUJ/cks/blob/master/tasks/cks/mock/01/README.MD
+  - https://github.com/ViktorUJ/cks/blob/master/tasks/cks/mock/02/README.MD
+  - https://github.com/ViktorUJ/cks/blob/master/tasks/cks/mock/03/README.MD
+  - https://github.com/ViktorUJ/cks/blob/master/tasks/cks/mock/04/README.MD
+  - killer_shell_a (html dump)
+  - killer_shell_b (html dump)
+  - https://killercoda.com/killer-shell-cks/
