@@ -66,6 +66,13 @@ Istio:
 - [Istio PeerAuthentication](https://istio.io/latest/docs/reference/config/security/peer_authentication/)
 
 ### Cluster setup 10%:
+| topics                                                                                                            | notes |
+|-------------------------------------------------------------------------------------------------------------------|-------|
+| Use Network security policies to restrict cluster level access                                                    |       |
+| Use CIS benchmark to review the security configuration of Kubernetes components (etcd, kubelet, kubedns, kubeapi) |       |
+| Properly set up Ingress with TLS                                                                                  |       |
+| Protect node metadata and endpoints                                                                               |       |
+| Verify platform binaries before deploying                                                                         |       |
 
 - [Use Network security policies to restrict cluster level access](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 - [Use CIS benchmark to review the security configuration of Kubernetes components (etcd, kubelet, kubedns, kubeapi)](https://www.cisecurity.org/benchmark/kubernetes/)
@@ -76,6 +83,14 @@ Istio:
 - [Minimize use of, and access to, GUI elements](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/#accessing-the-dashboard-ui)
 
 ### Cluster Hardening 15%:
+
+| topic                                                                                                              |  notes |
+|--------------------------------------------------------------------------------------------------------------|-|
+| Use Role Based Access Controls to minimize exposure                                                          | |
+| Exercise caution in using service accounts e.g. disable defaults, minimize permissions on newly created ones | |
+| Restrict access to Kubernetes API                                                                            | |
+| Upgrade Kubernetes to avoid vulnerabilities                                                                  | |
+
 
 - [Use Role Based Access Controls to minimize exposure](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 - Exercise caution in using service accounts e.g. 
@@ -88,6 +103,13 @@ minimize permissions on newly created ones
 
 ### System Hardening 15%:
 
+| topic                                                              | notes |
+|--------------------------------------------------------------------|-------|
+| Minimize host OS footprint (reduce attack surface)                 |       |
+| Using least-privilege identity and access management               |       |
+| Minimize external access to the network                            |       |
+| Appropriately use kernel hardening tools such as AppArmor, seccomp |       |
+
 - [Restrict a Container's Access to Resources with AppArmor](https://kubernetes.io/docs/tutorials/security/apparmor/)
 - [Container Runtimes](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)
 - [Runtime Class](https://kubernetes.io/docs/concepts/containers/runtime-class/)
@@ -98,6 +120,13 @@ minimize permissions on newly created ones
 - [Access authentication and authorization](https://kubernetes.io/docs/reference/access-authn-authz/authentication/)
 
 ### Minimize Microservice Vulnerabilities (20%)
+
+| topic                                                                                     | notes |
+|-------------------------------------------------------------------------------------------|-------|
+| Use appropriate pod security standards                                                    |       |
+| Manage Kubernetes secrets                                                                 |       |
+| Understand and implement isolation techniques (multi-tenancy, sandboxed containers, etc.) |       |
+| Implement Pod-to-Pod encryption (Cilium, Istio)                                           |       |
 
 - Use appropriate pod security standards
 - [Manage kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
@@ -112,6 +141,12 @@ Use [container runtime](https://kubernetes.io/docs/concepts/containers/runtime-c
 - [Pod Security Admission (PSA)](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
 
 ### Supply Chain Security (20%)
+| topic                                                                                     | notes |
+|-------------------------------------------------------------------------------------------|-------|
+| Minimize base image footprint                                                             |       |
+| Understand your supply chain (e.g. SBOM, CI/CD, artifact repositories)                    |       |
+| Secure your supply chain (permitted registries, sign and validate artifacts, etc.)        |       |
+| Perform static analysis of user workloads and container images (e.g. Kubesec, KubeLinter) |       |
 
 - Secure your supply chain: [whitelist allowed image registries](https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/#why-do-i-need-admission-controllers), sign and validate images
 - Using [ImagePolicyWebhook admission Controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
@@ -128,6 +163,13 @@ Use [container runtime](https://kubernetes.io/docs/concepts/containers/runtime-c
 - [Docker group security](https://github.com/zealvora/certified-kubernetes-security-specialist/blob/main/domain-5-supply-chain-security/docker-security.md#docker-group-security)
 
 ### Monitoring, Logging and Runtime Security
+| topic                                                                                 | notes |
+|---------------------------------------------------------------------------------------|-------|
+| Perform behavioral analytics to detect malicious activities                           |       |
+| Detect threats within physical infrastructure, apps, networks, data, users and workloads |       |
+| Investigate and identify phases of attack and bad actors within the environment       |       |
+| Ensure immutability of containers at runtime                                          |       |
+| Use Kubernetes audit logs to monitor access                                           |       |
 
 - [falco](https://falco.org/docs/)
 - [falco basic rules](https://falco.org/docs/concepts/rules/basic-elements/)
