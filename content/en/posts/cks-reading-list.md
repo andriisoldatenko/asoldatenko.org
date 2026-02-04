@@ -194,6 +194,13 @@ Perform deep analytical investigation and identification of bad actors within th
 
 ### Tips:
 
+Falco:
+```bash
+# list all rules
+falco -L
+
+```
+
 Verify checksum of many binaries (search `shasum` k8s docs): 
 
 If you see:
@@ -439,3 +446,4 @@ SELinux
   - killer_shell_a (html dump)
   - killer_shell_b (html dump)
   - https://killercoda.com/killer-shell-cks/
+  - https://github.com/kubesimplify/cks-certification/tree/main/falco/newrule
