@@ -10,7 +10,7 @@ categories:
 ## About exam
 |                            | <!-- --> |
 |----------------------------|----------|
-| Duration                   | 2 hours  |
+| Duration                  | 2 hours  |
 | Number of questions: 15-20 | 15-20    |
 | Passing score              | 67%      |
 |    Prerequisite                        | CKA      |
@@ -28,6 +28,11 @@ echo "set ai et sw=2 ts=2 sts=2" > ~/.vimrc
 `sw` = shiftwidth
 `sts` = shifttabstop
 `ts` = tabspace
+
+To create terminal in vertical split, where you can run `k explain po.spec.securityConstraints`
+```
+:vert term
+```
 
 ### Domains & Weighting
 
