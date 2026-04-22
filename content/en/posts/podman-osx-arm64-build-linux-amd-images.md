@@ -32,7 +32,6 @@ podman machine init podman-machine-custom --disk-size 60 \
   --image https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/42.20250410.3.2/aarch64/fedora-coreos-42.20250410.3.2-applehv.aarch64.raw.gz
 ```
 
-
 ## Problem
 
 You like me to want to use podman on OSX (15.2 Sequoia) and build images for `--platform=linux/amd64` :)

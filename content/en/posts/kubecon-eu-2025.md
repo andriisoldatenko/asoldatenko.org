@@ -89,7 +89,7 @@ vulnerability scanners.
 
 ### Empowering Data Protection for Stateful Applications of k8s with[kanister.io](https://www.kanister.io/)
 
-Datadog real world Container Use Report 2022 ([link](https://www.datadoghq.com/container-report/))
+Datadog real world [Container Use Report 2022](https://www.datadoghq.com/container-report/)
 The DAM book Digital Asses Management for Photograpers (link)
 Install via helm kanister controller, 3 new CRs: BluePrints, ActionSets and...
 

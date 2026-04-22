@@ -5,16 +5,15 @@ draft = true
 +++
 
 
-# Introduction
+## Introduction
 
 We have basic go program which has some C dependency, so we need to complie it using `CGO=1`.
-
 
 ## Problem
 
 We have podman running on dev machine (at time of writing typically is OSX with arm architecture):
 
-```
+```bash
 uname -a | tr ";" "\n"
 Darwin hostname 24.4.0 Darwin Kernel Version 24.4.0: Wed Mar 19 21:16:34 PDT 2025; 
 root:xnu-11417.101.15~1/RELEASE_ARM64_T6000 arm64
@@ -41,22 +40,21 @@ Built:        Mon Oct  7 02:00:00 2024
 OS/Arch:      linux/arm64
 ```
 
+## CGo simple example
 
-## CGo simple example:
 ```go
 package main
 
 // int c = 1;
 import "C"
 import (
-	"fmt"
+ "fmt"
 )
 
 func main() {
-	fmt.Println(C.c)
+ fmt.Println(C.c)
 }
 
 ```
-
 
 ## Findings

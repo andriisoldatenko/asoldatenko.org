@@ -10,7 +10,7 @@ categories:
 
 
 
-* [Usernetes (Gen2) deploys a Kubernetes cluster inside Rootless Docker, so as to mitigate potential container-breakout 
+* [Usernetes (Gen2) deploys a Kubernetes cluster inside Rootless Docker, so as to mitigate potential container-breakout
 vulnerabilities.](https://github.com/rootless-containers/usernetes)
 * [The shortcomings of rootless containers](https://opensource.com/article/19/5/shortcomings-rootless-containers)
 * [Understanding root inside and outside a container](https://www.redhat.com/en/blog/understanding-container-users)

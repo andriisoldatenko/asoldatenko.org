@@ -13,7 +13,6 @@ categories:
 I use [`keynote`](https://www.apple.com/in/keynote/) to present, because it is simple and it's default on OSX which i use for writing code.
 I tried different tools, but i stuck with it for last 12 years or so for [all my talks](/pages/talks/).
 
-
 ## Syntax code highlight
 
 Important part of any tech presentation is to show code, of course
@@ -33,7 +32,7 @@ it pastes it as text but keeps formatting.
 Assuming I have a `Dockerfile` locally and if i run:
 
 ```bash
-$ pygmentize -f rtf Dockerfile | pbcopy
+pygmentize -f rtf Dockerfile | pbcopy
 ```
 
 and paste to keynote:
@@ -43,20 +42,18 @@ and paste to keynote:
 <!-- ## Highlight specific lines -->
 <!-- TODO: update later -->
 
-
 ## Share terminal on the stage
 
 Usually when you do presentation, the default setup is either extend your screen or mirror screen.
 And of course you need your presenter notes, unless you remember everything. So the only option
 for me is extending screens. But if you want to share your terminal application, you are in trouble.
-Because you need to switch to mirror screen, and usually it slows you down. 
+Because you need to switch to mirror screen, and usually it slows you down.
 
-What I realized recently is—you can create two terminals and mirror what you are typing in one terminal into another one. 
+What I realized recently is—you can create two terminals and mirror what you are typing in one terminal into another one.
 In this case, you can keep extended screens and switch between slides and terminal quickly.
 A big benefit is that you see what you type. Also, it's important to move the second terminal onto the extended screen.
 
 Okay, let's show you what it looks like. By the way, there are few ways of doing it.
-
 
 ### Option A: `screen`
 
@@ -65,8 +62,8 @@ Recently I discovered `-x` option for `screen` tool.
 > From `man screen`:
 > -x Attach to a not detached screen session. (Multi display mode).
 
-So you run `screen -x` in one of the instances of terminal and open second 
-one and run `screen` and it'll mirror everything you type. 
+So you run `screen -x` in one of the instances of terminal and open second
+one and run `screen` and it'll mirror everything you type.
 
 ### Option B: `tmux`
 

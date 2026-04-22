@@ -8,12 +8,13 @@ tocOpen: true
 
 ### Intro
 
-Here you will find the list of all my public speaking talks. 
+Here you will find the list of all my public speaking talks.
 
 ### Talks
+
 * **2025**:
   * _Code review in era of collaborative development_ @ [Swiss Python Summit](https://www.python-summit.ch/)
-  * _Saga of building multi-arch OCI containers for modern apps_ @ [Cloud Native Days Austria](https://cloudnativedays.at/) and [Containers Days]()
+  * _Saga of building multi-arch OCI containers for modern apps_ @ [Cloud Native Days Austria](https://cloudnativedays.at/)
     * :video_camera: watch the recording
     * :open_book: check slides
   * _The essense of Graceful Shutdown_ @ Python Italy 2025
