@@ -2,6 +2,7 @@
 title: 'Custom Debug Containers'
 date: 2026-07-23T19:07:45+02:00
 description: "Custom image to debug on K8s clusters"
+draft: true
 categories:
 - k8s
 - qemu
