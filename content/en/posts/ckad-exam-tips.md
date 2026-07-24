@@ -5,6 +5,7 @@ draft = true
 +++
 
 * [Intro](#intro)
+* [Aliases](#aliases)
 * [Application Design and Build](#application-design-and-build)
   * [Define, build and modify container images](#define-build-and-modify-container-images)
   * [Choose and use the right workload resource (Deployment, DaemonSet, CronJob, etc.)](#choose-and-use-the-right-workload-resource-deployment-daemonset-cronjob-etc)
@@ -37,6 +38,20 @@ draft = true
 ## Intro
 
 Exam takes 2 hours, k8s version is `1.35` (when i'm writing this).
+
+## Aliases
+
+```vimrc
+set expandtab
+set tabstop=2
+set shiftwidth=2
+```
+
+```bash
+export Y="-oyaml"
+
+export F="--grace-period=0 --force"
+```
 
 ## Application Design and Build
 
@@ -94,10 +109,57 @@ Diagram how Docker entrypoint/cmd works together with k8s command/args
 
 ### Choose and use the right workload resource (Deployment, DaemonSet, CronJob, etc.)
 
+Jobs/Cronsjobs
+
+https://kubernetes.io/docs/concepts/workloads/controllers/ttlafterfinished/
+https://kubernetes.io/docs/concepts/workloads/controllers/job/
+https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+
+```yaml
+# more details https://kubernetes.io/docs/concepts/workloads/controllers/job/#job-termination-and-cleanup
+activeDeadlineSeconds: 20
+```
+> Another way to terminate a Job is by setting an active deadline. The activeDeadlineSeconds applies to the duration 
+> of the job, no matter how many Pods are created. Once a Job reaches activeDeadlineSeconds, 
+> all of its running Pods are terminated and the 
+
+> Note that a Job's .spec.activeDeadlineSeconds takes precedence over its .spec.backoffLimit. Therefore, a Job that 
+> is retrying one or more failed Pods will not deploy additional Pods once it reaches the time limit specified by 
+> activeDeadlineSeconds, even if the backoffLimit is not yet reached.
+
 ### Understand multi-container Pod design patterns (e.g. sidecar, init and others)
+
+
+
+[Side containers](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/) `restartPolicy: Always`:
+
+```bash
+spec:
+  containers:
+    - name: myapp
+      image: alpine:latest
+      command: ['sh', '-c', 'while true; do echo "logging" >> /opt/logs.txt; sleep 1; done']
+      volumeMounts:
+        - name: data
+          mountPath: /opt
+  initContainers:
+    - name: logshipper
+      image: alpine:latest
+      # Setting restartPolicy: Always makes this a sidecar container.
+      restartPolicy: Always
+      command: ['sh', '-c', 'tail -F /opt/logs.txt']
+      volumeMounts:
+        - name: data
+          mountPath: /opt
+```
+
 
 ### Utilize persistent and ephemeral volumes
 
+> Note:
+> Persistence volume can be created only imperatively, not declaratively.
+> kubectl create pv <name> --help WON'T WORK
+> same for PV Claims
 
 ## Application Deployment
 
@@ -110,7 +172,44 @@ Diagram how Docker entrypoint/cmd works together with k8s command/args
 
 ### Understand API deprecations
 ### Implement probes and health checks
+
+```bash
+k explain pod.spec.containers.readinessProbe --recursive
+  exec  <ExecAction>
+    command     <[]string>
+  failureThreshold      <integer>
+  grpc  <GRPCAction>
+    port        <integer> -required-
+    service     <string>
+  httpGet       <HTTPGetAction>
+    host        <string>
+    httpHeaders <[]HTTPHeader>
+      name      <string> -required-
+      value     <string> -required-
+    path        <string>
+    port        <IntOrString> -required-
+    scheme      <string>
+    enum: HTTP, HTTPS
+  initialDelaySeconds   <integer>
+  periodSeconds <integer>
+  successThreshold      <integer>
+  tcpSocket     <TCPSocketAction>
+    host        <string>
+    port        <IntOrString> -required-
+  terminationGracePeriodSeconds <integer>
+  timeoutSeconds        <integer>
+```
+
+liveness probe: `k explain pod.spec.containers.livenessProbe --recursive`
+
 ### Use built-in CLI tools to monitor Kubernetes applications
+
+```bash
+k top pods --sort-by=memory
+
+k top pods --sort-by=cpu
+```
+
 ### Utilize container logs
 ### Debugging in Kubernetes
 
@@ -158,7 +257,33 @@ spec:
 
 ### Define resource requirements
 
-<HERE>
+```bash
+kubectl explain limitrange.spec --recursive
+
+FIELDS:
+  limits        <[]LimitRangeItem> -required-
+    default     <map[string]Quantity>
+    defaultRequest      <map[string]Quantity>
+    max <map[string]Quantity>
+    maxLimitRequestRatio        <map[string]Quantity>
+    min <map[string]Quantity>
+    type        <string> -required-
+```
+
+```bash
+kubectl explain resourcequota.spec --recursive
+
+FIELDS:
+  hard  <map[string]Quantity>
+  scopeSelector <ScopeSelector>
+    matchExpressions    <[]ScopedResourceSelectorRequirement>
+      operator  <string> -required-
+      enum: DoesNotExist, Exists, In, NotIn
+      scopeName <string> -required-
+      enum: BestEffort, CrossNamespacePodAffinity, NotBestEffort, NotTerminating, ....
+      values    <[]string>
+  scopes        <[]string>
+```
 
 ### Create & consume Secrets
 
@@ -195,6 +320,41 @@ spec:
 ```
 
 ### Understand ServiceAccounts
+
+Create Service account:
+
+```bash
+k create sa dashboard-sa
+```
+
+To decode service account public part
+```bash
+jwt_decode () {
+        jq -R 'split(".") | .[1] | @base64d | fromjson' <<< "$1"
+}
+```
+
+```bash
+jwt_decode `k create token dashboard-sa`
+{
+  "aud": [
+    "https://kubernetes.default.svc.cluster.local"
+  ],
+  "exp": 1777315468,
+  "iat": 1777311868,
+  "iss": "https://kubernetes.default.svc.cluster.local",
+  "jti": "c9b3bdff-14a6-4eae-b697-43a31fa59a48",
+  "kubernetes.io": {
+    "namespace": "default",
+    "serviceaccount": {
+      "name": "dashboard-sa",
+      "uid": "5a738c10-058e-4073-9e66-bfd3bf6b1a08"
+    }
+  },
+  "nbf": 1777311868,
+  "sub": "system:serviceaccount:default:dashboard-sa"
+}
+```
 
 ### Understand Application Security (SecurityContexts, Capabilities, etc.)
 
@@ -245,7 +405,21 @@ uid=0(root) gid=0(root) groups=0(root)
 
 ## Services and Networking
 
+TIP: create service for existing deployment
+```
+k expose deploy <deployment-name> --port=80 --target-port=8080 --name=<service-name>
+```
+
 ### Demonstrate basic understanding of NetworkPolicies
+
+> Note:
+> Network Policies can be created only imperatively, not declaratively.
+> kubectl create networkpolicy <name> --help WON'T WORK
+
+```bash
+k run test --image=busybox --labels=app=test --restart=Never --rm -it -- /bin/sh
+nc -zv -w 0 <pod-ip> 80
+```
 
 ### Provide and troubleshoot access to applications via services
 
@@ -263,10 +437,71 @@ kubectl api-resources | grep deploy
 deployments                         deploy       apps/v1                           true         Deployment
 ```
 
+
+
+Taints and tolerations
+
 ```bash
-export F="--grace-period=0 --force"
+k taint nodes node-name key=value:taint-effect
+
+# taint-effect
+# NoSchedule/PreferNoSchedule/NoExecute
+
+k describe node kind-control-plane | grep -i taints
+Taints:             <none>
+```
+
+```bash
+k explain pod.spec.tolerations
+
+FIELDS:
+  effect        <string>
+  enum: NoExecute, NoSchedule, PreferNoSchedule
+  key   <string>
+  operator      <string>
+  enum: Equal, Exists
+  tolerationSeconds     <integer>
+  value <string>
+```
+
+Node Affinity (restricts pod for certain nodes)
+```bash
+k explain deploy.spec.template.spec.affinity
+
+
 ```
 
 
+Find all resources via labels selectors and count:
+```bash
+kubectl get all --selector env=dev,bu=finance --no-headers | wc -l
+```
+
+
+TIP: how to set env vars for deployment
+```
+k set env deploy/nginx ANDRII=test
+
+k set env deploy/nginx --list
+# Deployment nginx, container nginx
+DEBUG=true
+ANDRII=test
+```
+
+
+VIM TIP:
+How to apply yaml from vim buffer without saving it to file:
+```
+kubectl run alpha --image=redis --dry-run=client -o yaml | vim -
+
+:%w !kubectl apply -f -
+```
+
+Review kubectl commands:
+https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
+
 ## Practice
 - https://github.com/dgkanatsios/CKAD-exercises/tree/main
+- https://www.linkedin.com/pulse/my-ckad-exam-experience-atharva-chauthaiwale/
+- https://medium.com/@harioverhere/ckad-certified-kubernetes-application-developer-my-journey-3afb0901014
+- https://github.com/lucassha/CKAD-resources
