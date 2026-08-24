@@ -1,61 +1,41 @@
 +++
 title = 'CKAD Exam Tips'
 date = 2026-02-02T14:49:52+01:00
-draft = true
+draft = false
 +++
-
-* [Intro](#intro)
-* [Aliases](#aliases)
-* [Application Design and Build](#application-design-and-build)
-  * [Define, build and modify container images](#define-build-and-modify-container-images)
-  * [Choose and use the right workload resource (Deployment, DaemonSet, CronJob, etc.)](#choose-and-use-the-right-workload-resource-deployment-daemonset-cronjob-etc)
-* [Application Deployment](#application-deployment)
-  * [Use Kubernetes primitives to implement common deployment strategies (e.g. blue/green or canary)](#use-kubernetes-primitives-to-implement-common-deployment-strategies-eg-bluegreen-or-canary)
-  * [Understand Deployments and how to perform rolling updates](#understand-deployments-and-how-to-perform-rolling-updates)
-  * [Use the Helm package manager to deploy existing packages](#use-the-helm-package-manager-to-deploy-existing-packages)
-  * [Kustomize](#kustomize)
-* [Application Observability and Maintenance](#application-observability-and-maintenance)
-  * [Understand API deprecations](#understand-api-deprecations)
-  * [Implement probes and health checks](#implement-probes-and-health-checks)
-  * [Use built-in CLI tools to monitor Kubernetes applications](#use-built-in-cli-tools-to-monitor-kubernetes-applications)
-  * [Utilize container logs](#utilize-container-logs)
-  * [Debugging in Kubernetes](#debugging-in-kubernetes)
-* [Application Environment, Configuration and Security](#application-environment-configuration-and-security)
-  * [Discover and use resources that extend Kubernetes (CRD, Operators)](#discover-and-use-resources-that-extend-kubernetes-crd-operators)
-  * [Understand authentication, authorization and admission control](#understand-authentication-authorization-and-admission-control)
-  * [Understand requests, limits, quotas](#understand-requests-limits-quotas)
-  * [Understand ConfigMaps](#understand-configmaps)
-  * [Define resource requirements](#define-resource-requirements)
-  * [Create & consume Secrets](#create--consume-secrets)
-  * [Understand ServiceAccounts](#understand-serviceaccounts)
-  * [Understand Application Security (SecurityContexts, Capabilities, etc.)](#understand-application-security-securitycontexts-capabilities-etc)
-* [Services and Networking](#services-and-networking)
-  * [Demonstrate basic understanding of NetworkPolicies](#demonstrate-basic-understanding-of-networkpolicies)
-  * [Provide and troubleshoot access to applications via services](#provide-and-troubleshoot-access-to-applications-via-services)
-  * [Use Ingress rules to expose applications](#use-ingress-rules-to-expose-applications)
-* [Practice](#practice)
 
 ## Intro
 
-Exam takes 2 hours, k8s version is `1.35` (when i'm writing this).
+This document is dump of all my notes during preparing to my CKAD exam. Maybe somebody find
+it useful as well.
+Exam takes 2 hours, k8s version is `1.35` (when i'm writing this) and there was ~17 questions.
+So it means you must be fast or even faster then you think, and after checking existing notes
+i found that it's not about knowladge and also about speed and accuracy. So knowing how
+to generate corect yaml quickly and know how to test your solution is crucial.
 
-## Aliases
 
+## Setup:
+For this exam it's easy to use, in many cases, just simple kind cluster. Since exam is about
+k8s 1.35:
+
+```bash
+kind create cluster --image=docker.io/kindest/node:v1.35.5
+```
+
+Set up vim
 ```vimrc
 set expandtab
 set tabstop=2
 set shiftwidth=2
+set ft=yaml
 ```
 
-```bash
-export Y="-oyaml"
-
-export F="--grace-period=0 --force"
+short invariant:
+```vimrc
+:set nu et ts=2 sw=2 ft=yaml
 ```
 
-## Application Design and Build
-
-### Define, build and modify container images
+## Define, build and modify container images
 
 It's not possible to edit specifications of an existing POD rather than:
 - `spec.containers[*].image`
@@ -107,7 +87,7 @@ Diagram how Docker entrypoint/cmd works together with k8s command/args
   
 ````  
 
-### Choose and use the right workload resource (Deployment, DaemonSet, CronJob, etc.)
+## Choose and use the right workload resource (Deployment, DaemonSet, CronJob, etc.)
 
 Jobs/Cronsjobs
 
@@ -128,8 +108,6 @@ activeDeadlineSeconds: 20
 > activeDeadlineSeconds, even if the backoffLimit is not yet reached.
 
 ### Understand multi-container Pod design patterns (e.g. sidecar, init and others)
-
-
 
 [Side containers](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/) `restartPolicy: Always`:
 
@@ -158,19 +136,11 @@ spec:
 
 > Note:
 > Persistence volume can be created only imperatively, not declaratively.
-> kubectl create pv <name> --help WON'T WORK
+> `kubectl create pv <name> --help` WON'T WORK
 > same for PV Claims
-
-## Application Deployment
-
-### Use Kubernetes primitives to implement common deployment strategies (e.g. blue/green or canary)
-### Understand Deployments and how to perform rolling updates
-### Use the Helm package manager to deploy existing packages
-### Kustomize
 
 ## Application Observability and Maintenance
 
-### Understand API deprecations
 ### Implement probes and health checks
 
 ```bash
@@ -209,17 +179,6 @@ k top pods --sort-by=memory
 
 k top pods --sort-by=cpu
 ```
-
-### Utilize container logs
-### Debugging in Kubernetes
-
-## Application Environment, Configuration and Security
-
-### Discover and use resources that extend Kubernetes (CRD, Operators)
-
-### Understand authentication, authorization and admission control
-
-### Understand requests, limits, quotas
 
 ### Understand ConfigMaps
 
@@ -406,7 +365,7 @@ uid=0(root) gid=0(root) groups=0(root)
 ## Services and Networking
 
 TIP: create service for existing deployment
-```
+```bash
 k expose deploy <deployment-name> --port=80 --target-port=8080 --name=<service-name>
 ```
 
@@ -421,11 +380,18 @@ k run test --image=busybox --labels=app=test --restart=Never --rm -it -- /bin/sh
 nc -zv -w 0 <pod-ip> 80
 ```
 
-### Provide and troubleshoot access to applications via services
+Very nice tutorial: https://github.com/networkpolicy/tutorial
 
-### Use Ingress rules to expose applications
 
-## Links
+TIP:
+```bash
+FRONTEND=<pod-name>
+kubectl exec -ti $FRONTEND -- curl -I --connect-timeout 5 backend:8080 | head -1
+
+# or wget
+
+wget --spider --timeout 1 pod-ip
+```
 
 ## Tips
 
@@ -436,8 +402,6 @@ Lists all of api-resource:
 kubectl api-resources | grep deploy
 deployments                         deploy       apps/v1                           true         Deployment
 ```
-
-
 
 Taints and tolerations
 
@@ -464,22 +428,22 @@ FIELDS:
   value <string>
 ```
 
-Node Affinity (restricts pod for certain nodes)
+Node Affinity (restricts pod for certain nodes):
+
 ```bash
 k explain deploy.spec.template.spec.affinity
-
-
 ```
 
 
 Find all resources via labels selectors and count:
+
 ```bash
 kubectl get all --selector env=dev,bu=finance --no-headers | wc -l
 ```
 
 
 TIP: how to set env vars for deployment
-```
+```bash
 k set env deploy/nginx ANDRII=test
 
 k set env deploy/nginx --list
@@ -490,18 +454,110 @@ ANDRII=test
 
 
 VIM TIP:
-How to apply yaml from vim buffer without saving it to file:
-```
+Apply yaml from vim buffer without saving it to file:
+```bash
 kubectl run alpha --image=redis --dry-run=client -o yaml | vim -
 
 :%w !kubectl apply -f -
 ```
 
+
+Apply command `kubectl` to the current open buffer
+```bash
+:r!kubectl run complex-pod --dry-run=client -oyaml --image nginx:1.25.1 --port 80
+```
+
+
+CURL Tip:
+
+Lets just use `alpine/curl` image:
+```bash
+k run test -it --image=alpine/curl
+k exec -it test -- sh
+# assuming we want to test nginx svc and check nginx version
+watch curl -sI http://nginx.default.svc.cluster.local
+
+Every 2.0s: curl -sI nginx                                                       2026-08-02 10:45:36
+
+HTTP/1.1 200 OK
+Server: nginx/1.23.4
+Date: Sun, 02 Aug 2026 10:45:36 GMT
+Content-Type: text/html
+Content-Length: 615
+Last-Modified: Tue, 28 Mar 2023 15:01:54 GMT
+Connection: keep-alive
+ETag: "64230162-267"
+Accept-Ranges: bytes
+```
+
+Custom column TIP with image of container:
+It's useful if we want to quickly test image version:
+```bash
+k get pods -o custom-columns="CONTAINER:.spec.containers[0].name,IMAGE:.spec.containers[0].image"
+CONTAINER   IMAGE
+grafana     grafana/grafana:10.2.1
+grafana     grafana/grafana:10.2.1
+grafana     grafana/grafana:10.2.1
+grafana     grafana/grafana:10.2.1
+grafana     grafana/grafana:10.2.1
+grafana     grafana/grafana:10.2.1
+nginx       nginx:1.23.0
+nginx       nginx:1.23.0
+nginx       nginx:1.23.0
+nginx       nginx:1.23.4
+nginx       nginx:1.23.4
+nginx       nginx:1.23.4
+test        alpine/curl
+```
+
+
+KIND TIP with `hostPath`
+
+```yaml
+apiVersion: kind.x-k8s.io/v1alpha4
+kind: Cluster
+nodes:
+  - role: control-plane
+    extraMounts:
+      - hostPath: /Users/andrii/work/ckad-prep
+        containerPath: /ckad-prep
+```
+
+```bash
+kind create cluster --config kind-config.yaml
+```
+
 Review kubectl commands:
 https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
 
-## Practice
-- https://github.com/dgkanatsios/CKAD-exercises/tree/main
-- https://www.linkedin.com/pulse/my-ckad-exam-experience-atharva-chauthaiwale/
-- https://medium.com/@harioverhere/ckad-certified-kubernetes-application-developer-my-journey-3afb0901014
-- https://github.com/lucassha/CKAD-resources
+Also know when you can use imperative approach with `kubectl create`:
+```bash
+k create -h | grep -A18 -i avail
+Available Commands:
+  clusterrole           Create a cluster role
+  clusterrolebinding    Create a cluster role binding for a particular cluster role
+  configmap             Create a config map from a local file, directory or literal value
+  cronjob               Create a cron job with the specified name
+  deployment            Create a deployment with the specified name
+  ingress               Create an ingress with the specified name
+  job                   Create a job with the specified name
+  namespace             Create a namespace with the specified name
+  poddisruptionbudget   Create a pod disruption budget with the specified name
+  priorityclass         Create a priority class with the specified name
+  quota                 Create a quota with the specified name
+  role                  Create a role with single rule
+  rolebinding           Create a role binding for a particular role or cluster role
+  secret                Create a secret using a specified subcommand
+  service               Create a service using a specified subcommand
+  serviceaccount        Create a service account with the specified name
+  token                 Request a service account token
+```
+
+and when you need quickly go to k8s/docs to copy layout.
+
+> Note: `NetworkPolicies` can't be created via imperatively
+
+```bash
+k explain netpol --recursive
+```
+but still go to k8s/and copy paste first example is the most quickies way
