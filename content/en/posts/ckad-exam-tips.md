@@ -134,9 +134,9 @@ spec:
 ### Utilize persistent and ephemeral volumes
 
 > Note:
-> Persistence volume can be created only imperatively, not declaratively.
-> `kubectl create pv <name> --help` WON'T WORK
-> same for PV Claims
+> PersistentVolumes and PersistentVolumeClaims can be created declaratively (YAML) with `kubectl apply -f`.
+> There is no `kubectl create pv` / `kubectl create pvc` generator subcommand, so you'll typically copy a YAML
+> template (e.g. from the docs) and adjust it.
 
 ## Application Observability and Maintenance
 
