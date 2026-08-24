@@ -518,7 +518,7 @@ kind: Cluster
 nodes:
   - role: control-plane
     extraMounts:
-      - hostPath: /Users/andrii/work/ckad-prep
+      - hostPath: /path/to/ckad-prep
         containerPath: /ckad-prep
 ```
 
