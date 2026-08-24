@@ -6,7 +6,7 @@ draft = false
 
 ## Intro
 
-This document is dump of all my notes during preparing to my CKAD exam. Maybe somebody find
+This document is a dump of all my notes from preparing for the CKAD exam. Maybe somebody will find
 it useful as well.
 Exam takes 2 hours, k8s version is `1.35` (when i'm writing this) and there was ~17 questions.
 So it means you must be fast or even faster then you think, and after checking existing notes
