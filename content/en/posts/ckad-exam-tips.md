@@ -85,7 +85,7 @@ Diagram how Docker entrypoint/cmd works together with k8s command/args
                    └──────────────────────┘    └────────────┘
                         the executable           the flags
   
-````  
+```
 
 ## Choose and use the right workload resource (Deployment, DaemonSet, CronJob, etc.)
 
