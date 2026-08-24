@@ -99,10 +99,9 @@ https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
 # more details https://kubernetes.io/docs/concepts/workloads/controllers/job/#job-termination-and-cleanup
 activeDeadlineSeconds: 20
 ```
-> Another way to terminate a Job is by setting an active deadline. The activeDeadlineSeconds applies to the duration 
-> of the job, no matter how many Pods are created. Once a Job reaches activeDeadlineSeconds, 
-> all of its running Pods are terminated and the 
-
+> Another way to terminate a Job is by setting an active deadline. The activeDeadlineSeconds applies to the duration
+> of the Job, no matter how many Pods are created. Once a Job reaches activeDeadlineSeconds, all running Pods are
+> terminated.
 > Note that a Job's .spec.activeDeadlineSeconds takes precedence over its .spec.backoffLimit. Therefore, a Job that 
 > is retrying one or more failed Pods will not deploy additional Pods once it reaches the time limit specified by 
 > activeDeadlineSeconds, even if the backoffLimit is not yet reached.
