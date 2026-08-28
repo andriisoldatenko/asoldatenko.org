@@ -76,3 +76,8 @@ apps, networks, data, users and workloads
 bad actors within the environment
 - Ensure immutability of containers at runtime
 - Use Kubernetes audit logs to monitor access
+
+
+## Intro
+
+https://github.com/techiescamp/cks-certification-guide
