@@ -79,5 +79,123 @@ bad actors within the environment
 
 
 ## Intro
-
+https://github.com/kubesimplify/cks-certification
 https://github.com/techiescamp/cks-certification-guide
+https://www.youtube.com/watch?v=_l232KiJHNA
+
+
+## Falco tips
+
+https://falco.org/docs/concepts/rules/basic-elements/
+https://falco.org/docs/reference/rules/supported-fields/
+
+
+Task: Detect /dev/mem Access:
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo3
+  template:
+    metadata:
+      labels:
+        app: demo3
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        command: ["/bin/sh", "-c", "while true; do cat /dev/mem; sleep 10; done"]
+        securityContext:
+          privileged: true
+```
+
+```bash
+cat custom-rules.yaml
+```
+
+```yaml
+customRules:
+  custom-rules.yaml: |-
+      - rule:  Detect /dev/mem Access
+        desc: Detect processes that attempt to read /dev/mem
+        condition: (evt.type=open or evt.type=openat) and fd.name=/dev/mem
+        output: "Process %proc.name accessed /dev/mem (command=%proc.cmdline user=%user.name container=%container.id image=%container.image.repository)"
+        priority: WARNING
+        tags: [security]
+```
+
+```bash
+helm install falco -f custom-rules.yaml falcosecurity/falco
+```
+
+```
+15:29:12.407913729: Warning Process cat accessed /dev/mem (command=cat /dev/mem user=root container=197922127b6f image=docker.io/library/busybox) container_id=197922127b6f container_name=busybox container_image_repository=docker.io/library/busybox container_image_tag=latest k8s_pod_name=demo3-54464dfb94-t28qr k8s_ns_name=default
+```
+
+how to find existing rule:
+
+```
+root@controlplane:/etc/falco$ grep -i "Terminal shell in container"
+^C
+root@controlplane:/etc/falco$ grep -ri "Terminal shell in container"
+falco_rules.local.yaml:- rule: Terminal shell in container
+falco_rules.yaml:    unique to your environment. The rule "Terminal shell in container" that fires when using "kubectl exec" is more Kubernetes
+falco_rules.yaml:- rule: Terminal shell in container
+```
+
+> You need to copy rule to `falco_rules.local.yaml` and modify it, otherwise it won't work
+
+
+
+## Troubleshout api-server
+
+```
+/var/log/pods
+/var/log/containers
+crictl logs
+kubelet logs: /var/log/syslog or journalctl
+
+# syslogs:
+tail -f /var/log/syslog | grep apiserver
+
+# or:
+journalctl | grep apiserver
+```
+
+## Audit policy from scratch
+
+https://github.com/moabukar/CKS-Exercises-Certified-Kubernetes-Security-Specialist/tree/main/1-cluster-setup
+
+## Ingress
+
+https://github.com/moabukar/CKS-Exercises-Certified-Kubernetes-Security-Specialist/tree/main/2-cluster-hardening
+
+
+## RBAC
+(focus on it and practice daily) CKA/CKS filter by topic
+```bash
+k create rolebinding -h | grep namespace
+  kubectl create rolebinding NAME --clusterrole=NAME|--role=NAME [--user=username] [--group=groupname] [--serviceaccount=namespace:serviceaccountname] [--dry-run=server|client|none] [options]
+```
+
+## Network polices
+(focus on it and practice daily) CKA/CKS filter by topic
+Also practice on homelab
+
+NP: Enable trafic from all ns WITH label hello=world
+```bash
+```
+
+## Passing parameters to Kubelet through systemd unit file
+
+## gVisor
+
+## appArmor
+
+## Trivy
