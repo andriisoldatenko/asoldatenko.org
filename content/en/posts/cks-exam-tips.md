@@ -153,6 +153,19 @@ falco_rules.yaml:- rule: Terminal shell in container
 
 
 
+## apiserver
+
+https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction
+
+```
+vim /etc/kubernetes/manifests/kube-apiserver.yaml
+
+# add
+--enable-admission-plugins=NodeRestriction
+```
+
+
+
 ## Troubleshout api-server
 
 ```
@@ -184,6 +197,35 @@ k create rolebinding -h | grep namespace
   kubectl create rolebinding NAME --clusterrole=NAME|--role=NAME [--user=username] [--group=groupname] [--serviceaccount=namespace:serviceaccountname] [--dry-run=server|client|none] [options]
 ```
 
+Because of this there are 4 different RBAC combinations and 3 valid ones:
+
+Role + RoleBinding (available in single Namespace, applied in single Namespace)
+ClusterRole + ClusterRoleBinding (available cluster-wide, applied cluster-wide)
+ClusterRole + RoleBinding (available cluster-wide, applied in single Namespace)
+Role + ClusterRoleBinding (NOT POSSIBLE: available in single Namespace, applied cluster-wide)
+
+Test:
+```bash
+k auth can-i delete deployments --as system:serviceaccount:ns1:pipeline -n ns1 # YES
+```
+
+Instead of testing one by one:
+```
+k -n applications auth can-i --list=true --as=smoke
+```
+
+```
+kubectl apply -f https://raw.githubusercontent.com/ViktorUJ/cks/refs/heads/master/tasks/cks/mock/01/k8s-6/scripts/task11.yaml
+```
+- update existing permissions for SA dev in Namespaces rbac-1:
+  - delete verb delete for pods
+  - add verb watch for pods
+- create new role dev in rbac-2 Namespaces:
+  - resource configmaps, verbs = get,list
+- create rolebinding dev in rbac-2, sa = dev in rbac-1 Namespace , role = dev
+- create pod dev-rbac NS=rbac-1 image = viktoruj/cks-lab, command = sleep 60000, SA=dev
+
+
 ## Network polices
 (focus on it and practice daily) CKA/CKS filter by topic
 Also practice on homelab
@@ -192,10 +234,81 @@ NP: Enable trafic from all ns WITH label hello=world
 ```bash
 ```
 
+Netpol deny for all outgoing traffic from all pods in ns=app,except DNS (port=53, tcp+udp)
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-out
+  namespace: app
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - ports:
+    - protocol: TCP
+      port: 53
+    - protocol: UDP
+      port: 53
+```
+
+
+Netpol for which allows egress traffic to all IPs (0.0.0.0/0 ) except 1.1.1.1 and only affect Pods with label `trust=nope`
+TIP: find a mask for IP so we can use it in `except`:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: metadata-server
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      trust: nope
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        except:
+          - 1.1.1.1/32
+```
+
 ## Passing parameters to Kubelet through systemd unit file
 
 ## gVisor
 
 ## appArmor
+
+
+https://apparmor.net/getting-started/confine-your-application/#put-the-profile-in-complain-mode
+
+> Each time AppArmor denies an operation, it logs the event. 
+Depending on your system configuration, events may appear in the kernel
+log, syslog, auditd, or journald:
+```
+sudo journalctl -fx -k --grep=apparmor
+```
+
+find current installed profiles:
+```
+apparmor_status
+# or
+aa-status | grep -f <list-items-to-grep>
+# or
+sudo cat /sys/kernel/security/apparmor/profiles | grep custom
+
+
+# load profile (NOTE: usually need to do on every node)
+apparmor_parser /root/profile
+
+scp /root/profile node01:/root/profile
+
+ssh node01
+scp /root/profile node01:/root/profile
+```
 
 ## Trivy
