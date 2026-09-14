@@ -79,6 +79,23 @@ bad actors within the environment
 
 
 ## Intro
+
+Prioritize hands-on practice with Falco, CIS benchmarks (kube-bench), network policies, and immutable root filesystems.
+
+
+Idea: Since these are shell settings, you will need to add them to `.bashrc` to ensure they are active 
+in all terminal emulators you start, therefore at the beginning of the exam open a terminal and do
+> NOTE:
+> try it with ssh, will it work?
+
+```
+alias kgp='kubectl get pods'
+export dry='--dry-run=client -o yaml'
+
+vi ~/.bashrc
+```
+
+https://medium.com/@kienlt.qn/prepare-for-the-certified-kubernetes-security-specialist-cks-exam-in-2025-b8bdcac60e4b
 https://github.com/kubesimplify/cks-certification
 https://github.com/techiescamp/cks-certification-guide
 https://www.youtube.com/watch?v=_l232KiJHNA
@@ -312,3 +329,10 @@ scp /root/profile node01:/root/profile
 ```
 
 ## Trivy
+
+
+## vim tips
+
+```
+:r!echo "hi!" | base64 | tr "\n"
+```
