@@ -10,23 +10,22 @@ categories:
 - containers
 ---
 
-## Define a problem:
+## Define a problem
 
 Sometimes we want to attach to a running pod and troubleshoot something from there. But it requires that image which container inside pod is running includes some tools we need ( atleast shell, and some basic linux tools: cat, grep etc. )
 
 ## How to debug k8s?
 
-The first simple idea that came to mind is to run `kubectl exec -it <pod-name> - sh`. And if it includes shell we can navigate and do some basic checks for example ping, or check if we have permissions to create or modify files etc. 
+The first simple idea that came to mind is to run `kubectl exec -it <pod-name> - sh`. And if it includes shell we can navigate and do some basic checks for example ping, or check if we have permissions to create or modify files etc.
 
 But if the image is based on a distroless base image that won’t work. Later i’ll demonstrate error message and how to workaround it.
 
 ## What is a distroless image?
 
-
 [Distroless images](https://github.com/googlecontainertools/distroless) are very small around ~2MiB (`gcr.io/distroless/static-debian13`) compare to `alpine` ~5MiB. It usually helps to follow best practice especially security scanners (e.g. CVE), because less stuff baked inside the image less chance scanner can find some outdated library or dependency, which we probably won’t even use.
 
-
 ## Quick demo
+
 If you don't want to copy and create each file to follow my demo, you can clone it from:
 
 ```bash
@@ -35,8 +34,7 @@ git clone git@github.com:andriisoldatenko/debug-k8s-pods.git
 
 or just create folder and add these files:
 
-
-#### `cat main.go`
+### `cat main.go`
 
 ```go
 package main
@@ -59,7 +57,7 @@ func main() {
 }
 ```
 
-#### `cat go.mod`
+### `cat go.mod`
 
 ```go
 module example.com/hello
@@ -67,7 +65,7 @@ module example.com/hello
 go 1.25.0
 ```
 
-#### `cat Dockerfile`
+### `cat Dockerfile`
 
 ```dockerfile
 FROM golang:1.26 as build
@@ -164,10 +162,9 @@ spec:
     tty: true
 ```
 
-As you can see k8s uses ephemeralContainers to do a trick. 
+As you can see k8s uses ephemeralContainers to do a trick.
 
-
-## Summary 
+## Summary
 
 If you want to debug running pods which includes containers based on distroless images you can use native ephemeral containers via `kubectl debug`
 by replacing an image with our custom image (assuming image includes all we need, shell, tools etc.).

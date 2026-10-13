@@ -11,7 +11,6 @@ Originally I've created this page with just a reading list,
 but later I found it useless. So it only consists of tips and lessons
 I learnt the hard way :)
 
-
 ## Cluster Setup
 
 - Use NetworkPolicies to restrict
@@ -23,7 +22,6 @@ configuration of Kubernetes components
 - Protect node metadata and endpoints
 - Verify platform binaries before deploying
 
-
 ## Cluster Hardening
 
 - Use Role Based Access Controls to
@@ -33,7 +31,6 @@ e.g. disable defaults, minimize permissions
 on newly created ones
 - Restrict access to Kubernetes API
 - Upgrade Kubernetes to avoid vulnerabilities
-
 
 ## System Hardening
 
@@ -66,8 +63,8 @@ registries, sign and validate artifacts, etc.)
 and container images (e.g. Kubesec,
 KubeLinter)
 
-
 ## Monitoring, Logging and Runtime Security
+
 - Perform behavioral analytics to detect
 malicious activities
 - Detect threats within physical infrastructure,
@@ -76,7 +73,6 @@ apps, networks, data, users and workloads
 bad actors within the environment
 - Ensure immutability of containers at runtime
 - Use Kubernetes audit logs to monitor access
-
 
 ## Where to practice
 
@@ -101,18 +97,16 @@ Skip multiple-choice courses and "dumps", the exam is 100% hands-on.
 Suggested order: Killercoda daily (RBAC, NetworkPolicy, Falco) → ViktorUJ labs on weak topics →
 ViktorUJ mocks 01-04 with a timer → killer.sh session 1 → fix gaps → killer.sh session 2.
 
-
 ## Intro Falco
 
 Prioritize hands-on practice with Falco, CIS benchmarks (kube-bench), network policies, and immutable root filesystems.
 
-
-Idea: Since these are shell settings, you will need to add them to `.bashrc` to ensure they are active 
+Idea: Since these are shell settings, you will need to add them to `.bashrc` to ensure they are active
 in all terminal emulators you start, therefore at the beginning of the exam open a terminal and do
 > NOTE:
 > try it with ssh, will it work?
 
-```
+```bash
 alias kgp='kubectl get pods'
 export dry='--dry-run=client -o yaml'
 
@@ -124,16 +118,14 @@ https://github.com/kubesimplify/cks-certification
 https://github.com/techiescamp/cks-certification-guide
 https://www.youtube.com/watch?v=_l232KiJHNA
 
-
 ## Falco tips
 
 https://falco.org/docs/concepts/rules/basic-elements/
 https://falco.org/docs/reference/rules/supported-fields/
 
-
 Task: Detect /dev/mem Access:
 
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -176,13 +168,13 @@ helm repo add falcosecurity https://falcosecurity.github.io/charts
 helm install falco -f custom-rules.yaml falcosecurity/falco
 ```
 
-```
+```text
 15:29:12.407913729: Warning Process cat accessed /dev/mem (command=cat /dev/mem user=root container=197922127b6f image=docker.io/library/busybox) container_id=197922127b6f container_name=busybox container_image_repository=docker.io/library/busybox container_image_tag=latest k8s_pod_name=demo3-54464dfb94-t28qr k8s_ns_name=default
 ```
 
 how to find existing rule:
 
-```
+```console
 root@controlplane:/etc/falco$ grep -ri "Terminal shell in container"
 falco_rules.local.yaml:- rule: Terminal shell in container
 falco_rules.yaml:    unique to your environment. The rule "Terminal shell in container" that fires when using "kubectl exec" is more Kubernetes
@@ -193,24 +185,20 @@ falco_rules.yaml:- rule: Terminal shell in container
 > on upgrade, and the local file is loaded later, so a rule with the same name overrides the default one.
 > Restart Falco afterwards: `systemctl restart falco`
 
-
-
 ## apiserver
 
 https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction
 
-```
+```bash
 vim /etc/kubernetes/manifests/kube-apiserver.yaml
 
 # append to the existing list (don't replace it)
 --enable-admission-plugins=NodeRestriction,<existing-plugins>
 ```
 
-
-
 ## Troubleshoot api-server
 
-```
+```text
 /var/log/pods
 /var/log/containers
 crictl ps -a | grep kube-apiserver
@@ -232,9 +220,10 @@ https://github.com/moabukar/CKS-Exercises-Certified-Kubernetes-Security-Speciali
 
 https://github.com/moabukar/CKS-Exercises-Certified-Kubernetes-Security-Specialist/tree/main/2-cluster-hardening
 
-
 ## RBAC
+
 (focus on it and practice daily) CKA/CKS filter by topic
+
 ```bash
 k create rolebinding -h | grep namespace
   kubectl create rolebinding NAME --clusterrole=NAME|--role=NAME [--user=username] [--group=groupname] [--serviceaccount=namespace:serviceaccountname] [--dry-run=server|client|none] [options]
@@ -248,18 +237,21 @@ Because of this there are 4 different RBAC combinations and 3 valid ones:
 - Role + ClusterRoleBinding (NOT POSSIBLE: available in single Namespace, applied cluster-wide)
 
 Test:
+
 ```bash
 k auth can-i delete deployments --as system:serviceaccount:ns1:pipeline -n ns1 # YES
 ```
 
 Instead of testing one by one:
-```
+
+```bash
 k -n applications auth can-i --list=true --as=smoke
 ```
 
-```
+```bash
 kubectl apply -f https://raw.githubusercontent.com/ViktorUJ/cks/refs/heads/master/tasks/cks/mock/01/k8s-6/scripts/task11.yaml
 ```
+
 - update existing permissions for SA dev in Namespaces rbac-1:
   - delete verb delete for pods
   - add verb watch for pods
@@ -268,16 +260,18 @@ kubectl apply -f https://raw.githubusercontent.com/ViktorUJ/cks/refs/heads/maste
 - create rolebinding dev in rbac-2, sa = dev in rbac-1 Namespace , role = dev
 - create pod dev-rbac NS=rbac-1 image = viktoruj/cks-lab, command = sleep 60000, SA=dev
 
-
 ## Network policies
+
 (focus on it and practice daily) CKA/CKS filter by topic
 Also practice on homelab
 
 NP: Enable traffic from all ns WITH label hello=world
+
 ```bash
 ```
 
 Netpol deny for all outgoing traffic from all pods in ns=app,except DNS (port=53, tcp+udp)
+
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -295,7 +289,6 @@ spec:
     - protocol: UDP
       port: 53
 ```
-
 
 Netpol which allows egress traffic to all IPs (0.0.0.0/0 ) except 1.1.1.1 and only affect Pods with label `trust=nope`
 TIP: find a mask for IP so we can use it in `except`:
@@ -326,18 +319,19 @@ spec:
 
 ## appArmor
 
-
 https://apparmor.net/getting-started/confine-your-application/#put-the-profile-in-complain-mode
 
-> Each time AppArmor denies an operation, it logs the event. 
+> Each time AppArmor denies an operation, it logs the event.
 Depending on your system configuration, events may appear in the kernel
 log, syslog, auditd, or journald:
-```
+
+```bash
 sudo journalctl -fx -k --grep=apparmor
 ```
 
 find current installed profiles:
-```
+
+```bash
 apparmor_status
 # or
 aa-status | grep -f <list-items-to-grep>
@@ -354,9 +348,8 @@ ssh node01 apparmor_parser -r /root/profile
 
 ## Trivy
 
-
 ## vim tips
 
-```
+```vim
 :r!echo -n "hi\!" | base64 | tr -d "\n"
 ```
