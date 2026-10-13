@@ -125,14 +125,6 @@ System Hardening:
 - [JSONPath](https://kubernetes.io/docs/reference/kubectl/jsonpath/)
 - [kubelet flags](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/)
 
-#### Skip
-
-- PodSecurityPolicy - removed in k8s 1.25, use PSS/PSA instead
-- API reference v1.26 - outdated, `k explain` is faster
-- Old blog posts (sysdig 2015, "11 ways not to get hacked" 2018, admission controllers 2019, OPA Gatekeeper 2019) - covered by current docs
-- "Managing TLS in a cluster" - it's about the CSR API, not pod-to-pod encryption
-- SELinux - rarely on the exam
-
 ### Mostly used articles during solving problems by me
 
 - [Encrypting Confidential Data at Rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/)
