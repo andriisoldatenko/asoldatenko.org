@@ -54,7 +54,7 @@ Ordered by domain weight, outdated links skipped.
 
 #### Phase 1: Exam overview
 
-- [ ] [CKS Curriculum v1.34](https://github.com/cncf/curriculum/blob/master/CKS_Curriculum%20v1.34.pdf)
+- [x] [CKS Curriculum v1.34](https://github.com/cncf/curriculum/blob/master/CKS_Curriculum%20v1.34.pdf)
 - [ ] [bmuschko exam review guide](https://github.com/bmuschko/cks-study-guide/blob/master/app-b/exam-review-guide.adoc) - short summary per domain
 - [ ] [Securing a Cluster](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/) - most topics on one page
 - [ ] [CKS Important Instructions](https://docs.linuxfoundation.org/tc-docs/certification/important-instructions-cks) - which docs/sites are allowed during the exam
@@ -69,7 +69,10 @@ Minimize Microservice Vulnerabilities:
 - [ ] [Enforce PSS with the admission controller](https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-admission-controller/) - cluster-wide defaults and exemptions
 - [ ] [Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
 - [ ] [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) and [Encrypting data at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/)
+- [ ] [Managing Secrets using kubectl](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/) and [using a config file](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-config-file/)
 - [ ] [RuntimeClass](https://kubernetes.io/docs/concepts/containers/runtime-class/) and [gVisor with containerd](https://gvisor.dev/docs/user_guide/containerd/quick_start/)
+- [ ] [gVisor](https://gvisor.dev/) and [Kata Containers](https://katacontainers.io/) - how the sandboxes differ
+- [ ] [Gatekeeper](https://github.com/open-policy-agent/gatekeeper) README - OPA policies as admission control
 - [ ] [Cilium encryption](https://docs.cilium.io/en/stable/security/network/encryption/#gsg-encryption) and [Istio PeerAuthentication](https://istio.io/latest/docs/reference/config/security/peer_authentication/)
 - [ ] [Istio mutual TLS migration](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/) - PERMISSIVE vs STRICT in practice
 
@@ -80,6 +83,10 @@ Supply Chain Security:
 - [ ] [bom](https://github.com/kubernetes-sigs/bom) - generate SBOM
 - [ ] [Kubesec](https://kubesec.io/) and [KubeLinter](https://docs.kubelinter.io/) - both named in the curriculum
 - [ ] [Checkov](https://github.com/bridgecrewio/checkov) README
+- [ ] [hadolint](https://github.com/hadolint/hadolint) - Dockerfile linter
+- [ ] [Dockerfile best practices](https://docs.docker.com/build/building/best-practices/) and [multi-stage builds](https://docs.docker.com/build/building/multi-stage/) - minimize base image footprint
+- [ ] [Image pull policy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy)
+- [ ] [Ephemeral containers](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/) - debug distroless images
 - [ ] [Verify signed Kubernetes artifacts](https://kubernetes.io/docs/tasks/administer-cluster/verify-signed-artifacts/) - cosign
 
 Monitoring, Logging and Runtime Security:
@@ -87,6 +94,7 @@ Monitoring, Logging and Runtime Security:
 - [ ] [Auditing](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/) - read fully, know policy levels
 - [ ] [Falco rules basics](https://falco.org/docs/concepts/rules/basic-elements/) and [supported fields](https://falco.org/docs/reference/rules/supported-fields/)
 - [ ] [Sysdig Falco 101](https://learn.sysdig.com/falco-101) - free course
+- [ ] [Falco training](https://falco.org/training/)
 - [ ] [kubesimplify Falco new rule](https://github.com/kubesimplify/cks-certification/tree/main/falco/newrule)
 
 #### Phase 3: Hardening (15% each)
@@ -94,6 +102,7 @@ Monitoring, Logging and Runtime Security:
 Cluster Hardening:
 
 - [ ] [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+- [ ] [Service Accounts](https://kubernetes.io/docs/concepts/security/service-accounts/) - concepts
 - [ ] [Configure Service Accounts](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) - disable token automount
 - [ ] [Managing Service Accounts](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/) - bound tokens, TokenRequest
 - [ ] [Kubelet authentication/authorization](https://kubernetes.io/docs/reference/access-authn-authz/kubelet-authn-authz/) - `anonymous: false`, `authorization: Webhook`
@@ -111,19 +120,24 @@ System Hardening:
 #### Phase 4: Cluster Setup (10%)
 
 - [ ] [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+- [ ] [Declare Network Policy](https://kubernetes.io/docs/tasks/administer-cluster/declare-network-policy/)
 - [ ] [Network Policy recipes](https://github.com/ahmetb/kubernetes-network-policy-recipes) and [Network Policy editor](https://editor.networkpolicy.io/) - visualize what a policy allows
 - [ ] [Ingress TLS](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls)
 - [ ] [Restricting cloud metadata API](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/#restricting-cloud-metadata-api-access)
+- [ ] [Ports and Protocols](https://kubernetes.io/docs/reference/networking/ports-and-protocols/) - which node endpoints to protect
 - [ ] [kube-bench](https://github.com/aquasecurity/kube-bench)
 - [ ] [NodeRestriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction)
 - [ ] [Securing etcd](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#securing-etcd-clusters)
 - [ ] [Download Kubernetes](https://kubernetes.io/releases/download/) - binaries and checksums for verification
+- [ ] [Install kubectl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) - example of validating a binary with its checksum
 
 #### Phase 5: Exam-time references (bookmark, skim once)
 
 - [kubectl quick reference](https://kubernetes.io/docs/reference/kubectl/quick-reference/)
 - [JSONPath](https://kubernetes.io/docs/reference/kubectl/jsonpath/)
 - [kubelet flags](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/)
+- [kube-apiserver flags](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/)
+- [etcd configuration flags](https://etcd.io/docs/latest/op-guide/configuration/)
 
 ### Mostly used articles during solving problems by me
 
