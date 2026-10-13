@@ -55,7 +55,7 @@ Ordered by domain weight, outdated links skipped.
 #### Phase 1: Exam overview
 
 - [x] [CKS Curriculum v1.34](https://github.com/cncf/curriculum/blob/master/CKS_Curriculum%20v1.34.pdf)
-- [ ] [bmuschko exam review guide](https://github.com/bmuschko/cks-study-guide/blob/master/app-b/exam-review-guide.adoc) - short summary per domain
+- [x] [bmuschko exam review guide](https://github.com/bmuschko/cks-study-guide/blob/master/app-b/exam-review-guide.adoc) - short summary per domain
 - [ ] [Securing a Cluster](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/) - most topics on one page
 - [ ] [CKS Important Instructions](https://docs.linuxfoundation.org/tc-docs/certification/important-instructions-cks) - which docs/sites are allowed during the exam
 - [ ] [Kubernetes Security Checklist](https://kubernetes.io/docs/concepts/security/security-checklist/)
