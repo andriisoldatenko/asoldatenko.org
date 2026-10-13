@@ -113,6 +113,14 @@ export dry='--dry-run=client -o yaml'
 vi ~/.bashrc
 ```
 
+Refresh YAML structure with `k explain` instead of searching the docs:
+
+```bash
+k explain pods.spec | grep -C5 nodeName
+k explain pods.spec.securityContext
+k explain deployments.spec.template.spec
+```
+
 https://medium.com/@kienlt.qn/prepare-for-the-certified-kubernetes-security-specialist-cks-exam-in-2025-b8bdcac60e4b
 https://github.com/kubesimplify/cks-certification
 https://github.com/techiescamp/cks-certification-guide
@@ -122,6 +130,14 @@ https://www.youtube.com/watch?v=_l232KiJHNA
 
 https://falco.org/docs/concepts/rules/basic-elements/
 https://falco.org/docs/reference/rules/supported-fields/
+
+```bash
+# list all loaded rules
+falco -L
+
+# it can take a while until Falco prints output, -U/--unbuffered speeds it up
+falco -U | grep <pattern>
+```
 
 Task: Detect /dev/mem Access:
 
@@ -212,6 +228,26 @@ tail -f /var/log/syslog | grep apiserver
 journalctl | grep apiserver
 ```
 
+## crictl and strace
+
+```bash
+crictl ps
+crictl ps -n1                    # only the latest container
+crictl ps --id f86cd629e71c
+crictl pods --id cab6dafd045d5
+crictl pods --name collector1
+crictl inspect <container-id> | grep -i '"pid"'
+```
+
+With the PID, use strace to find [syscalls](https://man7.org/linux/man-pages/man2/syscalls.2.html).
+strace writes to stderr, so redirect it before `grep`:
+
+```bash
+strace -f -p <pid> 2>&1 | grep -i kill
+# or only trace the syscall you need
+strace -f -p <pid> -e trace=kill
+```
+
 ## Audit policy from scratch
 
 https://github.com/moabukar/CKS-Exercises-Certified-Kubernetes-Security-Specialist/tree/main/1-cluster-setup
@@ -219,6 +255,51 @@ https://github.com/moabukar/CKS-Exercises-Certified-Kubernetes-Security-Speciali
 ## Ingress
 
 https://github.com/moabukar/CKS-Exercises-Certified-Kubernetes-Security-Specialist/tree/main/2-cluster-hardening
+
+## Verify platform binaries
+
+Search `shasum` in k8s docs. If you see:
+
+```text
+shasum: standard input: no properly formatted SHA checksum lines found
+```
+
+there must be **2 spaces** between the checksum and the file name:
+
+```bash
+echo "$(cat kube-apiserver.sha256)  kube-apiserver" | shasum -a 256 --check
+
+# or with a file in "<sha>  <file>" format
+cat sha.txt
+sha512sum -c sha.txt
+```
+
+## Certificates / CSR
+
+```bash
+# create key and CSR for a new user (CN = user name)
+openssl genrsa -out myuser.key 2048
+openssl req -new -key myuser.key -subj "/CN=myuser" -out myuser.csr
+
+# view the CSR
+openssl req -in myuser.csr -noout -text
+
+cat <<EOF > csr.yaml
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: myuser
+spec:
+  request: $(base64 < myuser.csr | tr -d "\n")
+  signerName: kubernetes.io/kube-apiserver-client
+  usages:
+  - client auth
+EOF
+
+k apply -f csr.yaml
+k certificate approve myuser
+k get csr myuser -o jsonpath='{.status.certificate}' | base64 -d > myuser.crt
+```
 
 ## RBAC
 
@@ -315,6 +396,70 @@ spec:
 
 ## Passing parameters to Kubelet through systemd unit file
 
+Where kubelet gets its config on kubeadm clusters:
+
+- `/usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf` - systemd drop-in
+- `/var/lib/kubelet/kubeadm-flags.env` - extra flags
+- `/var/lib/kubelet/config.yaml` - KubeletConfiguration
+
+Change kubelet config for all nodes through kubeadm:
+
+```bash
+kubectl -n kube-system edit cm kubelet-config
+
+# on every node
+kubeadm upgrade node phase kubelet-config
+systemctl daemon-reload
+systemctl restart kubelet
+```
+
+## Upgrade cluster
+
+E.g. from `v1.33.4` to `v1.34.1`. Control plane first:
+
+```bash
+k get node
+k drain <cp-node> --ignore-daemonsets
+
+apt update
+apt-mark unhold kubeadm
+apt install -y kubeadm=1.34.1-1.1
+apt-mark hold kubeadm
+
+kubeadm upgrade plan
+kubeadm upgrade apply v1.34.1
+
+apt-mark unhold kubelet kubectl
+apt install -y kubelet=1.34.1-1.1 kubectl=1.34.1-1.1
+apt-mark hold kubelet kubectl
+
+systemctl daemon-reload
+systemctl restart kubelet
+k uncordon <cp-node>
+```
+
+Then every worker (`drain`/`uncordon` from the control plane):
+
+```bash
+k drain <worker> --ignore-daemonsets
+ssh <worker>
+
+apt update
+apt-mark unhold kubeadm
+apt install -y kubeadm=1.34.1-1.1
+apt-mark hold kubeadm
+kubeadm upgrade node
+
+apt-mark unhold kubelet kubectl
+apt install -y kubelet=1.34.1-1.1 kubectl=1.34.1-1.1
+apt-mark hold kubelet kubectl
+systemctl daemon-reload
+systemctl restart kubelet
+exit
+
+k uncordon <worker>
+```
+
 ## gVisor
 
 ## appArmor
@@ -346,9 +491,69 @@ scp /root/profile node01:/root/profile
 ssh node01 apparmor_parser -r /root/profile
 ```
 
-## Trivy
+## Supply chain (Trivy, bom)
+
+```bash
+trivy image --help | grep format
+trivy image --severity HIGH,CRITICAL nginx:1.19
+trivy image --format json --output result.json alpine:3.15
+# report in CycloneDX format
+trivy image --format cyclonedx --output result.cdx alpine:3.15
+```
+
+Generate SBOM with `bom`:
+
+```bash
+bom generate --image registry.k8s.io/kube-apiserver:v1.31.0 --format json --output kube-apiserver.spdx.json
+```
+
+## kubectl tricks
+
+Copy/paste from [kubectl quick reference](https://kubernetes.io/docs/reference/kubectl/quick-reference/):
+
+```bash
+alias kx='f() { [ "$1" ] && kubectl config use-context $1 || kubectl config current-context ; } ; f'
+alias kn='f() { [ "$1" ] && kubectl config set-context --current --namespace $1 || kubectl config view --minify | grep namespace | cut -d" " -f6 ; } ; f'
+```
+
+Filter by field instead of `grep`:
+
+```bash
+kubectl get pods --field-selector=metadata.name=test
+```
+
+Find all images to scan (jsonpath recursive descent `..image`):
+
+```bash
+kubectl get deploy -o=jsonpath='{range .items[*]}{.metadata.name}{" -> "}{..image}{"\n"}{end}'
+kubectl get deploy -o=custom-columns="NAME:.metadata.name,IMAGE:..image"
+```
+
+Find all securityContexts of pods/containers:
+
+```bash
+kubectl get pods -o=custom-columns='N:metadata.name,PSC:..securityContext'
+```
 
 ## vim tips
+
+```bash
+echo "set ai et sw=2 ts=2 sts=2" >> ~/.vimrc
+```
+
+- `ai` = autoindent - copy indent from current line when starting a new line
+- `et` = expandtab - insert spaces instead of a tab
+- `sw` = shiftwidth - number of spaces for each indent step (`>>`, `<<`)
+- `ts` = tabstop - number of spaces a tab counts for
+- `sts` = softtabstop - number of spaces inserted when pressing Tab
+
+Open a terminal in vertical split to run `k explain pods.spec.securityContext` while editing:
+
+```vim
+:vert term
+```
+
+Insert command output into the file:
 
 ```vim
 :r!echo -n "hi\!" | base64 | tr -d "\n"
