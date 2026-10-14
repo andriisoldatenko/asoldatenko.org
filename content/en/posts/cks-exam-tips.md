@@ -557,4 +557,82 @@ Insert command output into the file:
 
 ```vim
 :r!echo -n "hi\!" | base64 | tr -d "\n"
+||||||| Stash base
+## Trivy
+=======
+## Trivy
+
+For exam it's useful to grep list of CVE:
+
+trivy httpd:2.4.39-alpine | egrep  "CVE-2021-28831|CVE-2016-9841"
+
+Also to find an image simplies:
+
+```
+k -n applications get pod -oyaml | grep image:
+
+but 
+
+k get --help | grep custom
+
+```
+
+## kube-bench
+
+To run very special check on master (control-plane):
+
+```bash
+kube-bench run --targets master --check 1.3.2
+```
+
+## docker/podman
+
+Create two Docker containers sharing the same PID namespace
+```
+docker --rm run --name app1 -d nginx:alpine sleep infinity
+
+
+# --pid=""  : Set the PID (Process) Namespace mode for the container,
+#             'container:<name|id>': joins another container's PID namespace
+#             'host': use the host's PID namespace inside the container
+
+docker run --name app2 --pid=container:app1 -d nginx:alpine sleep infinity
+```
+
+Podman:
+
+```
+podman run -d --name app1 nginx:alpine sleep infinity
+
+podman run -d --name app2 --pid=container:app1 nginx:alpine sleep infinity
+
+podman exec -it app1 sh
+/ # ps aux
+PID   USER     TIME  COMMAND
+    1 root      0:00 sleep infinity
+    5 root      0:00 sleep infinity
+    9 root      0:00 sh
+   14 root      0:00 ps aux
+```
+
+## ImagePolicyWebhook setup
+
+
+`vim /etc/kubernetes/manifests/kube-apiserver.yaml`
+
+
+```
+spec:
+  containers:
+  - command:
+    - kube-apiserver
+    - --enable-admission-plugins=NodeRestriction,ImagePolicyWebhook
+    - --admission-control-config-file=/etc/kubernetes/policywebhook/admission_config.json
+```
+
+
+## Image Use Digest
+
+```
+k set image deploy crazy-deployment httpd=httpd@sha256:c7b8040505e2e63eafc82d37148b687ff488bf6d25fc24c8bf01d71f5b457531
 ```
