@@ -48,6 +48,97 @@ To create terminal in vertical split, where you can run `k explain po.spec.secur
 | * Supply Chain Security                    | 20%    |
 | * Monitoring, Logging and Runtime Security | 20%    |
 
+### Reading order
+
+Ordered by domain weight, outdated links skipped.
+
+#### Phase 1: Exam overview
+
+- [x] [CKS Curriculum v1.34](https://github.com/cncf/curriculum/blob/master/CKS_Curriculum%20v1.34.pdf)
+- [x] [bmuschko exam review guide](https://github.com/bmuschko/cks-study-guide/blob/master/app-b/exam-review-guide.adoc) - short summary per domain
+- [ ] [Securing a Cluster](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/) - most topics on one page
+- [ ] [CKS Important Instructions](https://docs.linuxfoundation.org/tc-docs/certification/important-instructions-cks) - which docs/sites are allowed during the exam
+- [ ] [Kubernetes Security Checklist](https://kubernetes.io/docs/concepts/security/security-checklist/)
+
+#### Phase 2: High-weight domains (20% each)
+
+Minimize Microservice Vulnerabilities:
+
+- [ ] [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/), then [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
+- [ ] [Enforce PSS with namespace labels](https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-namespace-labels/)
+- [ ] [Enforce PSS with the admission controller](https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-admission-controller/) - cluster-wide defaults and exemptions
+- [ ] [Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+- [ ] [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) and [Encrypting data at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/)
+- [ ] [Managing Secrets using kubectl](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/) and [using a config file](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-config-file/)
+- [ ] [RuntimeClass](https://kubernetes.io/docs/concepts/containers/runtime-class/) and [gVisor with containerd](https://gvisor.dev/docs/user_guide/containerd/quick_start/)
+- [ ] [gVisor](https://gvisor.dev/) and [Kata Containers](https://katacontainers.io/) - how the sandboxes differ
+- [ ] [Gatekeeper](https://github.com/open-policy-agent/gatekeeper) README - OPA policies as admission control
+- [ ] [Cilium encryption](https://docs.cilium.io/en/stable/security/network/encryption/#gsg-encryption) and [Istio PeerAuthentication](https://istio.io/latest/docs/reference/config/security/peer_authentication/)
+- [ ] [Istio mutual TLS migration](https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/) - PERMISSIVE vs STRICT in practice
+
+Supply Chain Security:
+
+- [ ] [ImagePolicyWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#imagepolicywebhook)
+- [ ] [Trivy](https://github.com/aquasecurity/trivy) README and [Trivy SBOM](https://trivy.dev/latest/docs/supply-chain/sbom/)
+- [ ] [bom](https://github.com/kubernetes-sigs/bom) - generate SBOM
+- [ ] [Kubesec](https://kubesec.io/) and [KubeLinter](https://docs.kubelinter.io/) - both named in the curriculum
+- [ ] [Checkov](https://github.com/bridgecrewio/checkov) README
+- [ ] [hadolint](https://github.com/hadolint/hadolint) - Dockerfile linter
+- [ ] [Dockerfile best practices](https://docs.docker.com/build/building/best-practices/) and [multi-stage builds](https://docs.docker.com/build/building/multi-stage/) - minimize base image footprint
+- [ ] [Image pull policy](https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy)
+- [ ] [Ephemeral containers](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/) - debug distroless images
+- [ ] [Verify signed Kubernetes artifacts](https://kubernetes.io/docs/tasks/administer-cluster/verify-signed-artifacts/) - cosign
+
+Monitoring, Logging and Runtime Security:
+
+- [ ] [Auditing](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/) - read fully, know policy levels
+- [ ] [Falco rules basics](https://falco.org/docs/concepts/rules/basic-elements/) and [supported fields](https://falco.org/docs/reference/rules/supported-fields/)
+- [ ] [Sysdig Falco 101](https://learn.sysdig.com/falco-101) - free course
+- [ ] [Falco training](https://falco.org/training/)
+- [ ] [kubesimplify Falco new rule](https://github.com/kubesimplify/cks-certification/tree/main/falco/newrule)
+
+#### Phase 3: Hardening (15% each)
+
+Cluster Hardening:
+
+- [ ] [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+- [ ] [Service Accounts](https://kubernetes.io/docs/concepts/security/service-accounts/) - concepts
+- [ ] [Configure Service Accounts](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) - disable token automount
+- [ ] [Managing Service Accounts](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/) - bound tokens, TokenRequest
+- [ ] [Kubelet authentication/authorization](https://kubernetes.io/docs/reference/access-authn-authz/kubelet-authn-authz/) - `anonymous: false`, `authorization: Webhook`
+- [ ] [Anonymous requests](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#anonymous-requests)
+- [ ] [Issue a client cert via CSR](https://kubernetes.io/docs/tasks/tls/certificate-issue-client-csr/)
+- [ ] [kubeadm upgrade](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
+
+System Hardening:
+
+- [ ] [AppArmor](https://kubernetes.io/docs/tutorials/security/apparmor/)
+- [ ] [seccomp](https://kubernetes.io/docs/tutorials/security/seccomp/)
+- [ ] [Linux kernel security constraints](https://kubernetes.io/docs/concepts/security/linux-kernel-security-constraints/) - AppArmor, seccomp, SELinux and capabilities overview
+- [ ] [Kubelet config file](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/) and [kubeadm kubelet integration](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/kubelet-integration/)
+
+#### Phase 4: Cluster Setup (10%)
+
+- [ ] [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+- [ ] [Declare Network Policy](https://kubernetes.io/docs/tasks/administer-cluster/declare-network-policy/)
+- [ ] [Network Policy recipes](https://github.com/ahmetb/kubernetes-network-policy-recipes) and [Network Policy editor](https://editor.networkpolicy.io/) - visualize what a policy allows
+- [ ] [Ingress TLS](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls)
+- [ ] [Restricting cloud metadata API](https://kubernetes.io/docs/tasks/administer-cluster/securing-a-cluster/#restricting-cloud-metadata-api-access)
+- [ ] [Ports and Protocols](https://kubernetes.io/docs/reference/networking/ports-and-protocols/) - which node endpoints to protect
+- [ ] [kube-bench](https://github.com/aquasecurity/kube-bench)
+- [ ] [NodeRestriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction)
+- [ ] [Securing etcd](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#securing-etcd-clusters)
+- [ ] [Download Kubernetes](https://kubernetes.io/releases/download/) - binaries and checksums for verification
+- [ ] [Install kubectl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) - example of validating a binary with its checksum
+
+#### Phase 5: Exam-time references (bookmark, skim once)
+
+- [kubectl quick reference](https://kubernetes.io/docs/reference/kubectl/quick-reference/)
+- [JSONPath](https://kubernetes.io/docs/reference/kubectl/jsonpath/)
+- [kubelet flags](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/)
+- [kube-apiserver flags](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/)
+- [etcd configuration flags](https://etcd.io/docs/latest/op-guide/configuration/)
+
 ### Mostly used articles during solving problems by me
 
 - [Encrypting Confidential Data at Rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/)
@@ -191,7 +282,7 @@ Use [container runtime](https://kubernetes.io/docs/concepts/containers/runtime-c
   Perform behavioural analytics of syscall process and file activities at the host and container level to detect malicious activities
   - [Falco installation guide](https://falco.org/docs/)
   - :triangular_flag_on_post: [Sysdig Falco 101](https://learn.sysdig.com/falco-101)
-  - :triangular_flag_on_post: [Falco Helm Chart](https://github.com/falcosecurity/charts/tree/master/falco)
+  - :triangular_flag_on_post: [Falco Helm Chart](https://github.com/falcosecurity/charts/tree/master/charts/falco)
   - :triangular_flag_on_post: [Falco Kubernetes helmchart](https://github.com/falcosecurity/charts)
   - :triangular_flag_on_post: [Detect CVE-2020-8557 using Falco](https://falco.org/blog/detect-cve-2020-8557/)
     Detect threats within a physical infrastructure, apps, networks, data, users and workloads
@@ -427,40 +518,33 @@ SELinux
 
 ### Install containerd and k8s 1.32 on ubuntu 24.04
 
-1. Create t3.small ec2 instance based on ubuntu, because we need atleast 2GB RAM for k8s.
+1. Create t3.small ec2 instance based on ubuntu, because we need at least 2GB RAM for k8s.
 
 https://github.com/zealvora/certified-kubernetes-security-specialist/blob/main/domain-1-cluster-setup/kubeadm-install.md
 
 ### Related materials
 
-- https://github.com/jangroth/kubernetes-certification-notes/blob/main/cks/studycard.md#17-reconfigure-cluster
-
-## Footnotes
-
-SELinux
-
-- [What is SELinux (Security-Enhanced Linux)](https://www.redhat.com/en/topics/linux/what-is-selinux)
-- [Check if SELinux is Enabled](https://docs.oracle.com/cd/E17952_01/mysql-5.7-en/selinux-checking.html)
+Study guides:
 
 - https://github.com/stackrox/Kubernetes_Security_Specialist_Study_Guide#cluster-hardening---15
 - https://github.com/ramanagali/Interview_Guide/blob/main/CKS_Preparation_Guide.md
 - https://github.com/walidshaari/Certified-Kubernetes-Security-Specialist
 - https://github.com/zealvora/certified-kubernetes-security-specialist/
-- https://github.com/jangroth/kubernetes-certification-notes/blob/main/cks/studycard.md#1-cluster-setup
-- [CKS Tips Kubernetes 1.34](https://killer.sh/attendee/cef7d7f1-fca3-4052-bf76-ba374b710ec4/tips)
-- videos:
-  - [Kubernetes CKS Full Course Theory + Practice + Browser Scenarios](https://www.youtube.com/watch?v=d9xfB5qaOfg)
-- practise:
-  - killer.sh
-  - killer Koda
-  - or install your own cluster https://github.com/killer-sh/cks-course-environment/tree/master
-  - https://killercoda.com/killer-shell-cks/scenario/apiserver-misconfigured
-  - https://github.com/ramanagali/Interview_Guide/blob/main/CKS_Preparation_Guide.md
+- https://github.com/jangroth/kubernetes-certification-notes/blob/main/cks/studycard.md
+
+Videos:
+
+- [Kubernetes CKS Full Course Theory + Practice + Browser Scenarios](https://www.youtube.com/watch?v=d9xfB5qaOfg)
+
+### Practice
+
+- [killer.sh](https://killer.sh) - 2 sessions included with the exam
+- [Killercoda: Killer Shell CKS](https://killercoda.com/killer-shell-cks/)
+  - e.g. https://killercoda.com/killer-shell-cks/scenario/apiserver-misconfigured
+- or install your own cluster https://github.com/killer-sh/cks-course-environment/tree/master
+- ViktorUJ mock exams:
   - https://github.com/ViktorUJ/cks/blob/master/tasks/cks/mock/01/README.MD
   - https://github.com/ViktorUJ/cks/blob/master/tasks/cks/mock/02/README.MD
   - https://github.com/ViktorUJ/cks/blob/master/tasks/cks/mock/03/README.MD
   - https://github.com/ViktorUJ/cks/blob/master/tasks/cks/mock/04/README.MD
-  - killer_shell_a (html dump)
-  - killer_shell_b (html dump)
-  - https://killercoda.com/killer-shell-cks/
-  - https://github.com/kubesimplify/cks-certification/tree/main/falco/newrule
+- https://github.com/kubesimplify/cks-certification/tree/main/falco/newrule
