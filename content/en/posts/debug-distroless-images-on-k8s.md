@@ -34,7 +34,7 @@ git clone git@github.com:andriisoldatenko/debug-k8s-pods.git
 
 or just create folder and add these files:
 
-#### `cat main.go`
+### `cat main.go`
 
 ```go
 package main
