@@ -1,7 +1,6 @@
 +++
 title = 'Linux Caps Notes'
 date = 2025-11-02T18:53:59+01:00
-draft = true
 +++
 
 
