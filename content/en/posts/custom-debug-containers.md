@@ -28,10 +28,11 @@ categories:
 
 ## Intro
 
-In my [previous post](./debug-distroless-images-on-k8s.md), I wrote about how to run a debug ephemeral container to troubleshoot distroless images in Kubernetes. I also mentioned that we can use a custom image to override a distroless image, allowing us to run specific troubleshooting tools. 
+In my [previous post](./debug-distroless-images-on-k8s.md), I wrote about how to run a debug ephemeral container to troubleshoot distroless images in Kubernetes. I also mentioned that we can use a custom image to override a distroless image, allowing us to run specific troubleshooting tools.
 In this post, I will demonstrate how to set up a custom debug container and explain why it is beneficial to do so.
 
 ## Problem
+
 Assuming we want to debug an issue within a Kubernetes cluster, we generally have two options:
 
 Run a pod, attach to it, and perform quick checks or run specific tools:
@@ -52,16 +53,16 @@ kubectl debug -it \
 ```
 
 As you can see we can specify an image `--image=asoldatenko/debug` or `--image=busybox` to run a debug container.
-So we need to make sure all tools we need to debug are included in the image. 
+So we need to make sure all tools we need to debug are included in the image.
 I have created a custom image that includes all the tools I typically use for debugging, such as `Go`, `netcat`, `tshark`, and `openssl`.
 
 ## Existing images with different tools
 
-Alternatively, we could simply install tools during the debugging session using `apk add golang` (if using an Alpine base image), 
+Alternatively, we could simply install tools during the debugging session using `apk add golang` (if using an Alpine base image),
 but this is difficult to manage and must be repeated every time.
 
-Another approach is to use an existing image that comes pre-loaded with various tools, such as [`nicolaka/netshoot`](https://github.com/nicolaka/netshoot). 
-However, you are limited to what an author has included; for example, `Go` might be missing, 
+Another approach is to use an existing image that comes pre-loaded with various tools, such as [`nicolaka/netshoot`](https://github.com/nicolaka/netshoot).
+However, you are limited to what an author has included; for example, `Go` might be missing,
 or you might need a custom tool you created.
 
 ## My debug image
@@ -101,24 +102,25 @@ docker build -t asoldatenko/debug:latest .
 docker push asoldatenko/debug:latest
 ```
 
-Furthermore, I wanted to automate the maintenance of this image:  add or remove new tools. 
+Furthermore, I wanted to automate the maintenance of this image:  add or remove new tools.
 And of course, I don’t want to do it manually (meaning I don’t want to build and push images by hand, right? We are developers lazy folks).
 
-And last but not least, we can control what we want to include and reduce image size so debugging a little bit faster if the 
+And last but not least, we can control what we want to include and reduce image size so debugging a little bit faster if the
 image is not cached by kubernetes, but nowadays, it’s not critical.
 
 ## Multi-platform builds and CI/CD
 
-Important nuance, on day-to-day basis, I use a MacBook with an Apple Silicon chip (arm64 architecture), 
+Important nuance, on day-to-day basis, I use a MacBook with an Apple Silicon chip (arm64 architecture),
 but the Kubernetes cluster I debug is running on AMD64 or arm architecture.
 
 So I need to make sure the image is built for both architectures.
-Since GitHub Actions are free for public repositories, I configured a workflow to automatically build and push the image whenever a PR is merged into the main branch. 
+Since GitHub Actions are free for public repositories, I configured a workflow to automatically build and push the image whenever a PR is merged into the main branch.
 Now, a simple PR automatically renders a fresh image complete with the new tools.
 
 More details can be found here https://github.com/andriisoldatenko/debug/blob/main/.github/workflows/docker-publish.yml#L34-L45
 
 or tl;dr, here is the relevant snippet:
+
 ```yaml
   # Build and push Docker image with Buildx (don't push on PR)
   # https://github.com/docker/build-push-action
@@ -134,12 +136,13 @@ or tl;dr, here is the relevant snippet:
       cache-from: type=gha
       cache-to: type=gha,mode=max
 ```
+
 This setup builds a multi-architecture image using QEMU and Docker.
 This removes the burden of tracking the underlying platform architecture during troubleshooting.
 While I currently target linux/amd64 and linux/arm64, this can easily be extended to support other platforms.
 
 ## Conclusion
 
-In this post, I demonstrated how to create a custom debug container image that includes all the necessary 
-tools for troubleshooting issues in Kubernetes clusters. By automating the build and push process using GitHub Actions, 
-we can ensure that the image is always up-to-date with the latest tools and is available for multiple architectures. 
+In this post, I demonstrated how to create a custom debug container image that includes all the necessary
+tools for troubleshooting issues in Kubernetes clusters. By automating the build and push process using GitHub Actions,
+we can ensure that the image is always up-to-date with the latest tools and is available for multiple architectures.
